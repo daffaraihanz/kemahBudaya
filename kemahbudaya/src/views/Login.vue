@@ -4,7 +4,7 @@
       <div class="text-center mt-5">
         <img src="../assets/logo.png" alt />
       </div>
-      <div class="mt-5">
+      <div class="mt-5 mb-4">
         <div class="input-wrapper">
           <p>Email</p>
           <input type="text" placeholder="Masukkan email" />

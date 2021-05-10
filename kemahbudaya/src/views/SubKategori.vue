@@ -11,7 +11,7 @@
         <router-link to="/detailSubKategori">
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
             <img src="../assets/dummyImage2.png" alt />
-            <div class="card">
+            <div class="card item rotate">
               <h5
                 :style="{color: '#' + myColor(myListSubKategori.id)}"
               >{{ myListSubKategori.title }}</h5>
@@ -19,7 +19,12 @@
           </div>
         </router-link>
         <router-link to="/quiz">
-          <PrimaryButton title="Mulai Kuis Sekarang" bgcolor="#83DC9C" bordercolor="#30B755" />
+          <PrimaryButton
+            class="mt-5"
+            title="Mulai Kuis Sekarang"
+            bgcolor="#83DC9C"
+            bordercolor="#30B755"
+          />
         </router-link>
       </div>
     </div>
@@ -86,6 +91,10 @@ export default {
 <style scoped>
 .subKategori {
   padding-bottom: 100px;
+}
+
+.card-wrapper:hover .card {
+  filter: brightness(90%);
 }
 
 .card-wrapper img {

@@ -49,7 +49,7 @@ button {
   /* background-color: #88b4fd; */
   color: white;
   font-weight: 700;
-  font-size: 19px;
+  font-size: 17px;
   width: 220px;
   height: 60px;
   border-radius: 20px;
