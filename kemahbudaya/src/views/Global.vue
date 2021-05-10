@@ -21,4 +21,8 @@ html {
 body {
   background: #eff4fc !important;
 }
+
+a {
+  text-decoration: none !important;
+}
 </style>

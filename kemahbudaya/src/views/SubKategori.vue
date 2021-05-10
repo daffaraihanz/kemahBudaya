@@ -8,12 +8,16 @@
       </div>
       <div>
         <h4 class="mt-4">Ayo lihat semua hewan yang ada</h4>
-        <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
-          <img src="../assets/dummyImage2.png" alt />
-          <div class="card">
-            <h5 :style="{color: '#' + myColor(myListSubKategori.id)}">{{ myListSubKategori.title }}</h5>
+        <router-link to="/detailSubKategori">
+          <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
+            <img src="../assets/dummyImage2.png" alt />
+            <div class="card">
+              <h5
+                :style="{color: '#' + myColor(myListSubKategori.id)}"
+              >{{ myListSubKategori.title }}</h5>
+            </div>
           </div>
-        </div>
+        </router-link>
         <router-link to="/quiz">
           <PrimaryButton title="Mulai Kuis Sekarang" bgcolor="#83DC9C" bordercolor="#30B755" />
         </router-link>
