@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import SubKategori from '../views/SubKategori.vue'
 import DetailSubKategori from '../views/DetailSubKategori.vue'
 import Quiz from '../views/Quiz.vue'
+import Grade from '../views/Grade.vue'
 import Global from '../views/Global.vue'
 
 Vue.use(VueRouter)
@@ -38,6 +39,11 @@ const routes = [{
     path: '/quiz',
     name: 'Quiz',
     component: Quiz
+  },
+  {
+    path: '/grade',
+    name: 'Grade',
+    component: Grade
   },
 ]
 
