@@ -15,46 +15,28 @@
         </div>
       </div>
 
-      <button>Masuk Sekarang</button>
+      <router-link to="/home">
+        <PrimaryButton title="Masuk Sekarang" bgcolor="#88B4FD" bordercolor="#357DF4" />
+      </router-link>
     </div>
   </section>
 </template>
 
 <script>
+import PrimaryButton from "../components/PrimaryButton";
+
 export default {
-  name: "Login"
+  name: "Login",
+  components: { PrimaryButton }
 };
 </script>
 
-<style>
-html {
-  height: 100% !important;
-}
-
+<style scoped>
 p {
   margin-bottom: 0 !important;
 }
 
-body {
-  background: #eff4fc !important;
-}
-
-.login button {
-  margin-top: 40px;
-  background-image: linear-gradient(#88b4fd, #619cfd);
-  color: white;
-  font-weight: 700;
-  font-size: 19px;
-  width: 100%;
-  height: 60px;
-  border-radius: 20px;
-  border: none;
-  border-bottom: solid 6px #357df4;
-}
-
 .login {
-  margin: 0 17px;
-  font-family: "Nunito";
   font-weight: 700;
 }
 
