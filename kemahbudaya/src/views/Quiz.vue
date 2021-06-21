@@ -3,7 +3,7 @@
     <div class="container">
       <img class="mt-5" src="../assets/arrowLeft.svg" alt />
       <div class="text-center question">
-        <img class="mt-4" src="../assets/dummyImage3.png" alt />
+        <img class="mt-4 img-fluid" src="../assets/dummyImage3.png" alt />
         <h2 class="mt-5 mb-4">Hewan apakah diatas ?</h2>
         <template v-if="test == 1">
           <div class="d-flex justify-content-between">

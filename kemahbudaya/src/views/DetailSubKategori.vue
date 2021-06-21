@@ -3,7 +3,7 @@
     <div class="container">
       <img class="mt-5" src="../assets/arrowLeft.svg" alt />
       <div class="mt-4">
-        <img src="../assets/dummyImage3.png" alt />
+        <img class="img-fluid" src="../assets/dummyImage3.png" alt />
         <div class="mt-3 mini-image-wrapper">
           <img src="../assets/dummyImage4.png" alt />
           <img src="../assets/dummyImage4.png" alt />
