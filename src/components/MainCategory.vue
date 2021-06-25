@@ -2,9 +2,17 @@
   <div :class="{imagePosition: myListMainCategory.id%2 == 0}" class="main-category">
     <img v-if="myListMainCategory.icon_url == null" src="@/assets/dummyImage.png" alt />
     <img v-else :src="myListMainCategory.icon_url" width="220px" height="220px" alt />
-    <div class="box"></div>
+    <div class="box">
+      <div
+        :class="{numberPositionRight: myListMainCategory.id%2 == 1,numberPositionLeft: myListMainCategory.id%2 == 0 }"
+        class="numberWrapper"
+      >
+        <p>{{myListMainCategory.id }}</p>
+      </div>
+    </div>
     <router-link :to="'/subKategori/' + myListMainCategory.id">
-      <button @click="setJudulSubKategori(myListMainCategory.nama)"
+      <button
+        @click="setJudulSubKategori(myListMainCategory.nama)"
         :style="[{ backgroundColor: myListMainCategory.id == 1 ? '#84AEFD' : myListMainCategory.id == 2 ? '#79D893' : myListMainCategory.id == 2 ? '#79D893' : myListMainCategory.id == 3 ? '#E9A14C' : myListMainCategory.id == 4 ? '#B083DC' : myListMainCategory.id == 5 ? '#74D3E8' : myListMainCategory.id == 6 ? '#F57373' : '#000000'},{ borderBottomColor: myListMainCategory.id == 1 ? '#357DF4' : myListMainCategory.id == 2 ? '#30B755' : myListMainCategory.id == 3 ? '#E39538' : myListMainCategory.id == 4 ? '#893CD7' : myListMainCategory.id == 5 ? '#27B4D3' : myListMainCategory.id == 6 ? '#D35151' : '#000000'}]"
         :class="{buttonPosition: myListMainCategory.id%2 == 0}"
       >{{ myListMainCategory.nama }}</button>
@@ -16,33 +24,40 @@
 export default {
   name: "MainCategory",
   props: ["myListMainCategory", "bgcolor"],
-  // computed: {
-  //   randomColor() {
-  //     if (myListMainCategory == 1) {
-  //       return "84AEFD";
-  //     }
-  //   }
-  // }
 
   data() {
-    return {
-      
-    }
+    return {};
   },
+  computed: {},
 
   methods: {
     setJudulSubKategori(judul) {
-      sessionStorage.removeItem('judulSubKategori')
-      sessionStorage.setItem('judulSubKategori', judul)
+      sessionStorage.removeItem("judulSubKategori");
+      sessionStorage.setItem("judulSubKategori", judul);
     }
-  },
+  }
 };
 </script>
 
 <style scoped>
+.numberWrapper p {
+  color: #a2c1ee;
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.numberWrapper {
+  position: absolute;
+  background: #e1edfe;
+  width: 56px;
+  border-radius: 200px;
+  height: 56px;
+  text-align: center;
+  line-height: 56px;
+  z-index: 999;
+}
 .box {
-  border: solid 18px #306dcf;
-  opacity: 30% !important;
+  border: solid 18px #e1edfe;
   width: 242px;
   height: 121px;
   margin: auto;
@@ -84,6 +99,16 @@ img {
 
 .imagePosition {
   text-align: right;
+}
+
+.numberPositionRight {
+  right: -35px;
+  top: -35px;
+}
+
+.numberPositionLeft {
+  left: -35px;
+  top: -35px;
 }
 
 .buttonPosition {
