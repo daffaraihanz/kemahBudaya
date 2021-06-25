@@ -35,7 +35,20 @@ export default {
       password: ""
     };
   },
+  mounted() {
+    this.cekSesi()
+  },
   methods: {
+    cekSesi() {
+      if(
+        sessionStorage.getItem('Eduwisata_token') &&
+        sessionStorage.getItem('Eduwisata_user_name') &&
+        sessionStorage.getItem('Eduwisata_user_role')
+      ) {
+        this.$router.push('/home')
+      }
+    },
+
     login() {
     
       var postBody = {

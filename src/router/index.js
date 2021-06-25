@@ -49,7 +49,7 @@ const routes = [{
     component: Global
   },
   {
-    path: '/subKategori',
+    path: '/subKategori/:id',
     name: 'SubKategori',
     beforeEnter: guardMyroute,
     component: SubKategori
