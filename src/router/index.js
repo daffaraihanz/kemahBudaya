@@ -7,6 +7,8 @@ import DetailSubKategori from '../views/DetailSubKategori.vue'
 import Quiz from '../views/Quiz.vue'
 import Grade from '../views/Grade.vue'
 import Global from '../views/Global.vue'
+import Error404 from '../views/404.vue'
+import no_connection from '../views/no_connection.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +74,16 @@ const routes = [{
     beforeEnter: guardMyroute,
     component: Grade
   },
+  {
+    path: '/no-connection',
+    name: 'No Connection',
+    component: no_connection
+  },
+  {
+    path: '*',
+    name: '404 Not Found',
+    component: Error404
+  }
 ]
 
 const router = new VueRouter({
