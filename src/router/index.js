@@ -9,6 +9,7 @@ import Grade from '../views/Grade.vue'
 import Global from '../views/Global.vue'
 import Error404 from '../views/404.vue'
 import no_connection from '../views/no_connection.vue'
+import desktop_not_allowed from '../views/desktop_not_allowed.vue'
 
 Vue.use(VueRouter)
 
@@ -78,6 +79,11 @@ const routes = [{
     path: '/no-connection',
     name: 'No Connection',
     component: no_connection
+  },
+  {
+    path: '/desktop_not_allowed',
+    name: 'Desktop not allowed',
+    component: desktop_not_allowed
   },
   {
     path: '*',
