@@ -35,9 +35,45 @@ export default {
     };
   },
   mounted() {
-    this.cekSesi();
+    this.cekSesi()
+    this.cek_koneksi_internet()
+    this.cek_desktop_atau_hp()
   },
   methods: {
+    cek_desktop_atau_hp() {
+        var isMobile = {
+            Android: function() {
+                return navigator.userAgent.match(/Android/i);
+            },
+            BlackBerry: function() {
+                return navigator.userAgent.match(/BlackBerry/i);
+            },
+            iOS: function() {
+                return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+            },
+            Opera: function() {
+                return navigator.userAgent.match(/Opera Mini/i);
+            },
+            Windows: function() {
+                return navigator.userAgent.match(/IEMobile/i) || navigator.userAgent.match(/WPDesktop/i);
+            },
+            any: function() {
+                return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+            }
+        };
+
+        if( !isMobile.any() ) {
+          this.$router.push('/desktop_not_allowed')
+        }
+
+      },
+
+    cek_koneksi_internet() {
+         if(!navigator.onLine){
+            this.$router.push('/no-connection')
+          }
+      },
+      
     cekSesi() {
       if (
         sessionStorage.getItem("Eduwisata_token") &&
@@ -49,6 +85,12 @@ export default {
     },
 
     login() {
+<<<<<<< HEAD
+=======
+
+      this.cek_koneksi_internet();
+    
+>>>>>>> 8efbcedbd09d2c6a0c5501d354db4e19889bf532
       var postBody = {
         username: this.email,
         password: this.password

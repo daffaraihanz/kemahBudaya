@@ -45,7 +45,7 @@ export default {
           loader.hide()
           this.$swal({
             title: 'Error!',
-            text: "Terjadi kesalahan, silahakn refresh halaman",
+            text: "Terjadi kesalahan, silahkan refresh halaman",
             icon: 'error',
           });
           console.error(error);
