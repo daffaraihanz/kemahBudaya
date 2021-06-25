@@ -14,7 +14,13 @@
         <h2>Kucing Jawa</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi numquam beatae dolor alias natus. Optio ipsa nostrum itaque accusamus cumque?</p>
       </div>
-      <div class="d-flex mt-4 justify-content-between">
+      <PrimaryButton
+        class="mt-4"
+        title="Aku Sudah Paham, Berikutnya"
+        bgcolor="#83DC9C"
+        bordercolor="#30B755"
+      />
+      <div class="d-flex mt-5 justify-content-between">
         <div class="speakerWrapper">
           <img src="@/assets/speaker.svg" alt />
         </div>
@@ -28,8 +34,12 @@
 </template>
 
 <script>
+import PrimaryButton from "../components/PrimaryButton";
 export default {
-  name: "DetailSubKategori"
+  name: "DetailSubKategori",
+  components: {
+    PrimaryButton
+  }
 };
 </script>
 

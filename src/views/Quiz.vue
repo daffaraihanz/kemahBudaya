@@ -42,12 +42,16 @@
           </div>
         </template>
         <div class="pagination">
-          <img src="@/assets/quizArrowLeft.svg" alt />
+          <div class="paginationWrapper">
+            <img src="@/assets/quizArrowLeft.svg" alt />
+          </div>
           <p>
             1 /
             <span>10</span>
           </p>
-          <img src="@/assets/quizArrowRight.svg" alt />
+          <div class="paginationWrapper">
+            <img src="@/assets/quizArrowRight.svg" alt />
+          </div>
         </div>
       </div>
     </div>
@@ -71,6 +75,18 @@ export default {
 </script>
 
 <style scoped>
+.paginationWrapper {
+  background: #fff;
+  text-align: center;
+  line-height: 45px;
+  width: 52px;
+  height: 52px;
+  border-radius: 20px;
+  border-radius: 20px;
+  border: none;
+  border-bottom: solid 6px #ddebff;
+}
+
 .quiz {
   padding-bottom: 50px;
 }
@@ -107,6 +123,7 @@ export default {
 .pagination {
   display: flex;
   margin-top: 50px;
+  align-items: center;
   justify-content: center;
 }
 
