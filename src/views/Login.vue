@@ -11,28 +11,24 @@
         </div>
         <div class="input-wrapper">
           <p>Password</p>
-          <input type="text" v-model="password" placeholder="Masukkan Password" />
+          <input type="password" v-model="password" placeholder="Masukkan Password" />
         </div>
       </div>
 
-      <router-link to="/home">
-        <PrimaryButton
-          @click="login()"
-          title="Masuk Sekarang"
-          bgcolor="#88B4FD"
-          bordercolor="#357DF4"
-        />
-      </router-link>
+        <button @click="login()" class="tombol-login" type="button">Masuk Sekarang</button>
+
     </div>
+
+    <br>
   </section>
 </template>
 
 <script>
-import PrimaryButton from "../components/PrimaryButton";
+import c from "@/config.js"
+import axios from 'axios'
 
 export default {
   name: "Login",
-  components: { PrimaryButton },
   data() {
     return {
       email: "",
@@ -40,7 +36,51 @@ export default {
     };
   },
   methods: {
-    login() {}
+    login() {
+    
+      var postBody = {
+        username: this.email,
+        password: this.password
+      }
+
+      let loader = this.$loading.show();
+
+      axios.post(c.config.server_host + '/api/login', postBody)
+        .then((response) => {
+          var data = response.data
+          loader.hide()
+
+          if(data.meta.short_msg == "username_atau_password_salah") {
+            this.$swal({
+              title: 'Error!',
+              text: data.meta.message,
+              icon: 'error',
+            });  
+          } else {
+            
+            this.$swal({
+              title: 'Berhasil!',
+              text: "Berhasil login!",
+              icon: 'success',
+            });  
+
+            sessionStorage.setItem('Eduwisata_token', data.results.access_token)
+            sessionStorage.setItem('Eduwisata_user_name', data.results.name)
+            sessionStorage.setItem('Eduwisata_user_role', data.results.role)
+          }
+
+          this.$router.push('/home')
+        })
+        .catch((error) => {
+          loader.hide()
+          this.$swal({
+            title: 'Error!',
+            text: "Terjadi kesalahan, silahkan refresh halaman",
+            icon: 'error',
+          });
+          console.error(error);
+        });
+    }
   }
 };
 </script>
@@ -72,5 +112,21 @@ p {
   border: none;
   padding: 0 25px;
   outline: none;
+}
+
+.tombol-login {
+  /* margin-top: 40px; */
+  /* background-image: linear-gradient(#88b4fd, #619cfd); */
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  background-color: #88B4FD;
+  border-bottom-color: #357DF4;
 }
 </style>

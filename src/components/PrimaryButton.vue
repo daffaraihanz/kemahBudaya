@@ -1,7 +1,9 @@
 <template>
-  <button
+  <button type="button"
     v-bind:style="[{ backgroundColor: bgcolor },{ borderBottomColor: bordercolor }, { color: textcolor }]"
-  >{{ title }}</button>
+  >
+  {{ title }}
+  </button>
 </template>
 
 <script>
