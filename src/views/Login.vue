@@ -7,16 +7,16 @@
       <div class="mt-5 mb-4">
         <div class="input-wrapper">
           <p>Email</p>
-          <input type="text" placeholder="Masukkan email" />
+          <input type="text" v-model="email" placeholder="Masukkan email" />
         </div>
         <div class="input-wrapper">
           <p>Password</p>
-          <input type="text" placeholder="Masukkan Password" />
+          <input type="text" v-model="password" placeholder="Masukkan Password" />
         </div>
       </div>
 
       <router-link to="/home">
-        <PrimaryButton title="Masuk Sekarang" bgcolor="#88B4FD" bordercolor="#357DF4" />
+        <PrimaryButton @click="login()" title="Masuk Sekarang" bgcolor="#88B4FD" bordercolor="#357DF4" />
       </router-link>
     </div>
   </section>
@@ -29,6 +29,19 @@ export default {
   name: "Login",
   components: { PrimaryButton }
 };
+
+data() {
+  return {
+    email: '',
+    password: ''
+  }
+},
+
+methods: {
+  login() {
+
+  }
+}
 </script>
 
 <style scoped>
