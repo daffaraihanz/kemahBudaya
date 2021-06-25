@@ -6,7 +6,7 @@
       <button
         :style="[{ backgroundColor: myListMainCategory.id == 1 ? '#84AEFD' : myListMainCategory.id == 2 ? '#79D893' : myListMainCategory.id == 2 ? '#79D893' : myListMainCategory.id == 3 ? '#E9A14C' : myListMainCategory.id == 4 ? '#B083DC' : myListMainCategory.id == 5 ? '#74D3E8' : myListMainCategory.id == 6 ? '#F57373' : '#000000'},{ borderBottomColor: myListMainCategory.id == 1 ? '#357DF4' : myListMainCategory.id == 2 ? '#30B755' : myListMainCategory.id == 3 ? '#E39538' : myListMainCategory.id == 4 ? '#893CD7' : myListMainCategory.id == 5 ? '#27B4D3' : myListMainCategory.id == 6 ? '#D35151' : '#000000'}]"
         :class="{buttonPosition: myListMainCategory.id%2 == 0}"
-      >{{ myListMainCategory.title }}</button>
+      >{{ myListMainCategory.nama }}</button>
     </router-link>
   </div>
 </template>
