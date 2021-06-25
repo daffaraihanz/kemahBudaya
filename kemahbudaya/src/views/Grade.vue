@@ -1,13 +1,13 @@
 <template>
   <section class="grade">
     <div class="container">
-      <img class="mt-5" src="../assets/arrowLeft.svg" alt />
+      <img class="mt-5" src="appassets/arrowLeft.svg" alt />
       <div class="score-wrapper mt-4 mb-5">
-        <img src="../assets/star.png" alt />
-        <img src="../assets/starcenter.png" alt />
-        <img src="../assets/star.png" alt />
+        <img src="appassets/star.png" alt />
+        <img src="appassets/starcenter.png" alt />
+        <img src="appassets/star.png" alt />
         <div class="d-flex align-items-center justify-content-center mt-4">
-          <img src="../assets/ic_time.svg" alt />
+          <img src="appassets/ic_time.svg" alt />
           <h2>5m 10d</h2>
         </div>
         <div class="total-wrapper mt-4">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import PrimaryButton from "../components/PrimaryButton";
+import PrimaryButton from "appcomponents/PrimaryButton";
 export default {
   name: "Grade",
   components: { PrimaryButton }

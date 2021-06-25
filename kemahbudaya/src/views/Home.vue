@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import MainCategory from "../components/MainCategory";
+import MainCategory from "appcomponents/MainCategory";
 
 export default {
   name: "Home",
