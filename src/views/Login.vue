@@ -11,7 +11,7 @@
         </div>
         <div class="input-wrapper">
           <p>Password</p>
-          <input type="password" v-model="password" placeholder="Masukkan Password" />
+          <input type="text" v-model="password" placeholder="Masukkan Password" />
         </div>
       </div>
 
