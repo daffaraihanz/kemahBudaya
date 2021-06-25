@@ -28,14 +28,14 @@ export default {
 <style scoped>
 .box {
   border: solid 18px #306dcf;
-  opacity: 30%;
+  opacity: 30% !important;
   width: 242px;
   height: 121px;
   margin: auto;
   position: absolute;
   left: 0;
   bottom: 0;
-  z-index: -99;
+  z-index: -1;
   border-radius: 40px;
   right: 0;
   position: absolute;
