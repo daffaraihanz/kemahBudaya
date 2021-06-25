@@ -11,21 +11,20 @@
         </div>
         <div class="input-wrapper">
           <p>Password</p>
-          <input type="password" v-model="password" placeholder="Masukkan Password" />
+          <input type="text" v-model="password" placeholder="Masukkan Password" />
         </div>
       </div>
 
-        <button @click="login()" class="tombol-login" type="button">Masuk Sekarang</button>
-
+      <button @click="login()" class="tombol-login" type="button">Masuk Sekarang</button>
     </div>
 
-    <br>
+    <br />
   </section>
 </template>
 
 <script>
-import c from "@/config.js"
-import axios from 'axios'
+import c from "@/config.js";
+import axios from "axios";
 
 export default {
   name: "Login",
@@ -36,60 +35,62 @@ export default {
     };
   },
   mounted() {
-    this.cekSesi()
+    this.cekSesi();
   },
   methods: {
     cekSesi() {
-      if(
-        sessionStorage.getItem('Eduwisata_token') &&
-        sessionStorage.getItem('Eduwisata_user_name') &&
-        sessionStorage.getItem('Eduwisata_user_role')
+      if (
+        sessionStorage.getItem("Eduwisata_token") &&
+        sessionStorage.getItem("Eduwisata_user_name") &&
+        sessionStorage.getItem("Eduwisata_user_role")
       ) {
-        this.$router.push('/home')
+        this.$router.push("/home");
       }
     },
 
     login() {
-    
       var postBody = {
         username: this.email,
         password: this.password
-      }
+      };
 
       let loader = this.$loading.show();
 
-      axios.post(c.config.server_host + '/api/login', postBody)
-        .then((response) => {
-          var data = response.data
-          loader.hide()
+      axios
+        .post(c.config.server_host + "/api/login", postBody)
+        .then(response => {
+          var data = response.data;
+          loader.hide();
 
-          if(data.meta.short_msg == "username_atau_password_salah") {
+          if (data.meta.short_msg == "username_atau_password_salah") {
             this.$swal({
-              title: 'Error!',
+              title: "Error!",
               text: data.meta.message,
-              icon: 'error',
-            });  
+              icon: "error"
+            });
           } else {
-            
             this.$swal({
-              title: 'Berhasil!',
+              title: "Berhasil!",
               text: "Berhasil login!",
-              icon: 'success',
-            });  
+              icon: "success"
+            });
 
-            sessionStorage.setItem('Eduwisata_token', data.results.access_token)
-            sessionStorage.setItem('Eduwisata_user_name', data.results.name)
-            sessionStorage.setItem('Eduwisata_user_role', data.results.role)
+            sessionStorage.setItem(
+              "Eduwisata_token",
+              data.results.access_token
+            );
+            sessionStorage.setItem("Eduwisata_user_name", data.results.name);
+            sessionStorage.setItem("Eduwisata_user_role", data.results.role);
           }
 
-          this.$router.push('/home')
+          this.$router.push("/home");
         })
-        .catch((error) => {
-          loader.hide()
+        .catch(error => {
+          loader.hide();
           this.$swal({
-            title: 'Error!',
+            title: "Error!",
             text: "Terjadi kesalahan, silahkan refresh halaman",
-            icon: 'error',
+            icon: "error"
           });
           console.error(error);
         });
@@ -139,7 +140,7 @@ p {
   border: none;
   border-bottom-style: solid;
   border-bottom-width: 6px;
-  background-color: #88B4FD;
-  border-bottom-color: #357DF4;
+  background-color: #88b4fd;
+  border-bottom-color: #357df4;
 }
 </style>
