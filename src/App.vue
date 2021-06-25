@@ -4,6 +4,28 @@
   </div>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        
+      }
+    },
+
+    mounted() {
+      this.cek_koneksi_internet()
+    },
+
+    methods: {
+      cek_koneksi_internet() {
+         if(!navigator.onLine){
+            this.$router.push('/no-connection')
+          }
+      }
+    },
+  }
+</script>
+
 <style>
 #app {
   -webkit-font-smoothing: antialiased;
