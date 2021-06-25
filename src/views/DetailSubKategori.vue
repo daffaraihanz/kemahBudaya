@@ -1,13 +1,13 @@
 <template>
   <section class="detailSubKategori">
     <div class="container">
-      <img class="mt-5" src="appassets/arrowLeft.svg" alt />
+      <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
-        <img class="img-fluid" src="appassets/dummyImage3.png" alt />
+        <img class="img-fluid" src="@/assets/dummyImage3.png" alt />
         <div class="mt-3 mini-image-wrapper">
-          <img src="appassets/dummyImage4.png" alt />
-          <img src="appassets/dummyImage4.png" alt />
-          <img src="appassets/dummyImage4.png" alt />
+          <img src="@/assets/dummyImage4.png" alt />
+          <img src="@/assets/dummyImage4.png" alt />
+          <img src="@/assets/dummyImage4.png" alt />
         </div>
       </div>
       <div class="mt-5 content">
@@ -42,7 +42,7 @@ export default {
   width: 66px;
   border-bottom: #d8d2e1 solid 6px;
   height: 66px;
-  background-image: url("appassets/indoFlag.png");
+  background-image: url("../assets/indoFlag.png");
   border-radius: 20px;
   background-repeat: no-repeat;
 }
@@ -53,7 +53,7 @@ export default {
   height: 66px;
   background-size: cover;
   border-bottom: #0d1a38 solid 6px;
-  background-image: url("appassets/englishFlag.png");
+  background-image: url("../assets/englishFlag.png");
   border-radius: 20px;
 }
 

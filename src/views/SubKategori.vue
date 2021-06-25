@@ -1,7 +1,7 @@
 <template>
   <section class="subKategori">
     <div class="container">
-      <img class="mt-5" src="appassets/arrowLeft.svg" alt />
+      <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
       <div class="title mt-4">
         <h2>Sekarang kamu lagi di,</h2>
         <h2>Taman Reptil</h2>
@@ -10,7 +10,7 @@
         <h4 class="mt-4">Ayo lihat semua hewan yang ada</h4>
         <router-link to="/detailSubKategori">
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
-            <img src="appassets/dummyImage2.png" alt />
+            <img src="@/assets/dummyImage2.png" alt />
             <div class="card item rotate">
               <h5
                 :style="{color: '#' + myColor(myListSubKategori.id)}"
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import PrimaryButton from "appcomponents/PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default {
   name: "SubKategori",

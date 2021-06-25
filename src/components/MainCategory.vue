@@ -1,6 +1,6 @@
 <template >
   <div :class="{imagePosition: myListMainCategory.id%2 == 0}" class="main-category">
-    <img src="app/assets/dummyImage.png" alt />
+    <img src="@/assets/dummyImage.png" alt />
     <div class="box"></div>
     <router-link to="/subKategori">
       <button

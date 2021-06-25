@@ -2,7 +2,7 @@
   <section class="login">
     <div class="container">
       <div class="text-center mt-5">
-        <img src="app/assets/logo.png" alt />
+        <img src="@/assets/logo.png" alt />
       </div>
       <div class="mt-5 mb-4">
         <div class="input-wrapper">
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import PrimaryButton from "appcomponents/PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default {
   name: "Login",

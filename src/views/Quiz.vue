@@ -1,9 +1,9 @@
 <template>
   <section class="quiz">
     <div class="container">
-      <img class="mt-5" src="appassets/arrowLeft.svg" alt />
+      <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
       <div class="text-center question">
-        <img class="mt-4 img-fluid" src="appassets/dummyImage3.png" alt />
+        <img class="mt-4 img-fluid" src="@/assets/dummyImage3.png" alt />
         <h2 class="mt-5 mb-4">Hewan apakah diatas ?</h2>
         <template v-if="test == 1">
           <div class="d-flex justify-content-between">
@@ -26,28 +26,28 @@
         <template v-else>
           <div class="d-flex justify-content-between">
             <div class="image-wrapper">
-              <img src="appassets/dummyImage5.png" alt />
+              <img src="@/assets/dummyImage5.png" alt />
             </div>
             <div class="image-wrapper">
-              <img src="appassets/dummyImage5.png" alt />
+              <img src="@/assets/dummyImage5.png" alt />
             </div>
           </div>
           <div class="d-flex justify-content-between mt-3">
             <div class="image-wrapper">
-              <img src="appassets/dummyImage5.png" alt />
+              <img src="@/assets/dummyImage5.png" alt />
             </div>
             <div class="image-wrapper">
-              <img src="appassets/dummyImage5.png" alt />
+              <img src="@/assets/dummyImage5.png" alt />
             </div>
           </div>
         </template>
         <div class="pagination">
-          <img src="appassets/quizArrowLeft.svg" alt />
+          <img src="@/assets/quizArrowLeft.svg" alt />
           <p>
             1 /
             <span>10</span>
           </p>
-          <img src="appassets/quizArrowRight.svg" alt />
+          <img src="@/assets/quizArrowRight.svg" alt />
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import PrimaryButton from "appcomponents/PrimaryButton";
+import PrimaryButton from "../components/PrimaryButton";
 
 export default {
   name: "Quiz",

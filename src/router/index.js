@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from 'appviews/Login.vue'
-import Home from 'appviews/Home.vue'
-import SubKategori from 'appviews/SubKategori.vue'
-import DetailSubKategori from 'appviews/DetailSubKategori.vue'
-import Quiz from 'appviews/Quiz.vue'
-import Grade from 'appviews/Grade.vue'
-import Global from 'appviews/Global.vue'
+import Login from '../views/Login.vue'
+import Home from '../views/Home.vue'
+import SubKategori from '../views/SubKategori.vue'
+import DetailSubKategori from '../views/DetailSubKategori.vue'
+import Quiz from '../views/Quiz.vue'
+import Grade from '../views/Grade.vue'
+import Global from '../views/Global.vue'
 
 Vue.use(VueRouter)
 
