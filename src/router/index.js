@@ -7,6 +7,7 @@ import DetailSubKategori from '../views/DetailSubKategori.vue'
 import Quiz from '../views/Quiz.vue'
 import Grade from '../views/Grade.vue'
 import Global from '../views/Global.vue'
+import Error404 from '../views/404.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ const routes = [{
     beforeEnter: guardMyroute,
     component: Grade
   },
+  {
+    path: '*',
+    name: '404 Not Found',
+    component: Error404
+  }
 ]
 
 const router = new VueRouter({
