@@ -16,7 +16,12 @@
       </div>
 
       <router-link to="/home">
-        <PrimaryButton @click="login()" title="Masuk Sekarang" bgcolor="#88B4FD" bordercolor="#357DF4" />
+        <PrimaryButton
+          @click="login()"
+          title="Masuk Sekarang"
+          bgcolor="#88B4FD"
+          bordercolor="#357DF4"
+        />
       </router-link>
     </div>
   </section>
@@ -27,21 +32,17 @@ import PrimaryButton from "../components/PrimaryButton";
 
 export default {
   name: "Login",
-  components: { PrimaryButton }
+  components: { PrimaryButton },
+  data() {
+    return {
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    login() {}
+  }
 };
-
-data() {
-  return {
-    email: '',
-    password: ''
-  }
-},
-
-methods: {
-  login() {
-
-  }
-}
 </script>
 
 <style scoped>
