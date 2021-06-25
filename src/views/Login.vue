@@ -37,8 +37,15 @@ export default {
   },
   mounted() {
     this.cekSesi()
+    this.cek_koneksi_internet()
   },
   methods: {
+    cek_koneksi_internet() {
+         if(!navigator.onLine){
+            this.$router.push('/no-connection')
+          }
+      },
+      
     cekSesi() {
       if(
         sessionStorage.getItem('Eduwisata_token') &&
@@ -50,6 +57,8 @@ export default {
     },
 
     login() {
+
+      this.cek_koneksi_internet();
     
       var postBody = {
         username: this.email,
