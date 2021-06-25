@@ -12,15 +12,16 @@
       </div>
       <div class="mt-5 content">
         <h2>Kucing Jawa</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Turpis vitae gravida dictum maecenas. Sagittis nisi, convallis nulla platea sed integer faucibus. Blandit tortor id eget pellentesque nec. Eu blandit vel at mollis accumsan, quam semper vitae vel. Amet volutpat quis facilisis quam elit. Proin fringilla non elit fringilla cursus. Lobortis neque urna etiam eu. A at faucibus in consectetur sit magna. Nunc nibh lorem in ut tristique amet.
-          Tortor quam morbi tincidunt vitae iaculis. Vitae dignissim accumsan vulputate eu cras ullamcorper in. Enim urna morbi amet tincidunt consequat enim pellentesque feugiat. Ornare quis aliquet ipsum, ultrices mi arcu lorem potenti morbi. Mauris, nisl pulvinar ipsum, ut at congue aenean velit.
-          Tortor nibh felis in suspendisse cursus faucibus. Mauris hac sit id gravida posuere. Ut semper pulvinar amet nunc non nulla ridiculus massa ante. Placerat amet ullamcorper quis cras turpis in. Convallis duis tincidunt varius tempus et. Dui eget adipiscing ultrices venenatis. Mus dolor, diam et commodo sit gravida facilisi aliquam auctor. Vitae cras ullamcorper in arcu nisi.
-        </p>
+        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi numquam beatae dolor alias natus. Optio ipsa nostrum itaque accusamus cumque?</p>
       </div>
-      <div class="d-flex justify-content-end mt-4">
-        <div class="indoFlag"></div>
-        <div class="englishFlag"></div>
+      <div class="d-flex mt-4 justify-content-between">
+        <div class="speakerWrapper">
+          <img src="@/assets/speaker.svg" alt />
+        </div>
+        <div class="d-flex">
+          <div class="indoFlag"></div>
+          <div class="englishFlag"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -33,6 +34,21 @@ export default {
 </script>
 
 <style scoped>
+.speakerWrapper {
+  width: 66px;
+  height: 66px;
+  border-radius: 20px;
+  background: linear-gradient(180deg, #ffffff 0%, #eff5ff 100%);
+  text-align: center;
+  line-height: 60px;
+  border-radius: 20px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  background-color: #88b4fd;
+  border-bottom-color: #ddebff;
+}
+
 .detailSubKategori {
   padding-bottom: 50px;
 }
