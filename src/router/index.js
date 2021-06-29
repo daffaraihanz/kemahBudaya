@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import SubKategori from '../views/SubKategori.vue'
+import listHewan from '../views/listHewan.vue'
 import DetailSubKategori from '../views/DetailSubKategori.vue'
 import Quiz from '../views/Quiz.vue'
 import Grade from '../views/Grade.vue'
@@ -58,7 +59,13 @@ const routes = [{
     component: SubKategori
   },
   {
-    path: '/detailSubKategori',
+    path: '/list-hewan/:id',
+    name: 'ListHewan',
+    beforeEnter: guardMyroute,
+    component: listHewan
+  },
+  {
+    path: '/detailSubKategori/:slug',
     name: 'DetailSubKategori',
     beforeEnter: guardMyroute,
     component: DetailSubKategori

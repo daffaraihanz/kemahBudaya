@@ -41,7 +41,7 @@
         };
 
         if( !isMobile.any() ) {
-          this.$router.push('/desktop_not_allowed')
+          //this.$router.push('/desktop_not_allowed')
         }
 
       },

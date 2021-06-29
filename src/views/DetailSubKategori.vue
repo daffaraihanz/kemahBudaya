@@ -1,45 +1,140 @@
 <template>
   <section class="detailSubKategori">
     <div class="container">
-      <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
+      <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
-        <img class="img-fluid" src="@/assets/dummyImage3.png" alt />
+        <img class="img-fluid" :src="gb_sampul" alt />
         <div class="mt-3 mini-image-wrapper">
-          <img src="@/assets/dummyImage4.png" alt />
-          <img src="@/assets/dummyImage4.png" alt />
-          <img src="@/assets/dummyImage4.png" alt />
+          <img style="width: 86px; height: 86px" v-if="hewan.gb_sampul" @click="set_sampul_source(hewan.gb_sampul)" :src="hewan.gb_sampul" alt />
+          <img style="width: 86px; height: 86px" v-if="hewan.gb_lainnya" @click="set_sampul_source(hewan.gb_lainnya)" :src="hewan.gb_lainnya" alt />
+          <!-- <img src="@/assets/dummyImage4.png" alt />
+          <img src="@/assets/dummyImage4.png" alt /> -->
         </div>
       </div>
       <div class="mt-5 content">
-        <h2>Kucing Jawa</h2>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi numquam beatae dolor alias natus. Optio ipsa nostrum itaque accusamus cumque?</p>
+        <h2>
+          {{hewan.nama}}
+        </h2>
+
+
+        <p v-if="deskripsi_b_indo">
+          {{hewan.deskripsi_b_indo}}
+        </p>
+
+        <p v-if="deskripsi_b_inggris">
+          {{hewan.deskripsi_b_inggris}}
+        </p>
+
       </div>
-      <PrimaryButton
-        class="mt-4"
-        title="Aku Sudah Paham, Berikutnya"
-        bgcolor="#83DC9C"
-        bordercolor="#30B755"
-      />
-      <div class="d-flex mt-5 justify-content-between">
-        <div class="speakerWrapper">
+
+
+      <iframe v-if="iframe_source" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :src="iframe_source" width="100%"></iframe>
+
+      <br><br>
+
+      <div class="d-flex mt-4 justify-content-center">
+
+        <div v-if="hewan.assets_suara_narator" class="speakerWrapper">
           <img src="@/assets/speaker.svg" alt />
         </div>
+
         <div class="d-flex">
-          <div class="indoFlag"></div>
-          <div class="englishFlag"></div>
+          <div @click="set_deskripsi_b_indo" class="indoFlag"></div>
+          <div @click="set_deskripsi_b_inggris" class="englishFlag"></div>
         </div>
       </div>
+
+      <!-- <br>
+
+      <PrimaryButton
+            class="mt-4"
+            title="Aku Sudah Paham, Berikutnya"
+            bgcolor="#83DC9C"
+            bordercolor="#30B755"
+          /> -->
+
+
     </div>
   </section>
 </template>
 
 <script>
-import PrimaryButton from "../components/PrimaryButton";
+
+//import PrimaryButton from "../components/PrimaryButton";
+import c from "@/config.js"
+import axios from 'axios'
+
 export default {
-  name: "DetailSubKategori",
   components: {
-    PrimaryButton
-  }
+    // PrimaryButton
+  },
+  name: "DetailSubKategori",
+  data() {
+    return {
+      hewan: {},
+      deskripsi_b_indo: true,
+      deskripsi_b_inggris: false,
+      iframe_source: false,
+      gb_sampul: null,
+    }
+  },
+
+  mounted() {
+    this.getData()
+  },
+
+  methods: {
+    set_deskripsi_b_inggris() {
+      this.deskripsi_b_indo = false
+      this.deskripsi_b_inggris = true
+    },
+    set_deskripsi_b_indo() {
+      this.deskripsi_b_indo = true
+      this.deskripsi_b_inggris = false
+    },
+    backBtn() {
+      window.history.go(-1); return false;
+    },
+    set_sampul_source(link_gambar) {
+      this.gb_sampul = link_gambar
+    },
+    getData() {
+      const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
+      let loader = this.$loading.show();
+      axios.get(c.config.server_host + "/api/user/get-data-by-slug/" + this.$route.params.slug, {
+          headers: {
+            Authorization: AuthStr
+          }
+        }).then(response => {
+          var data = (response.data.results)
+          console.log(data);
+          this.hewan = data
+
+          this.set_sampul_source(data.gb_sampul)
+          
+          if(data.link_youtube) {
+            var url = new URL(data.link_youtube);
+            var v = url.searchParams.get("v");
+            console.log(v);
+
+            this.iframe_source = "https://www.youtube.com/embed/" + v
+          }
+
+          loader.hide()
+        })
+        .catch((error) => {
+          loader.hide()
+          this.$swal({
+            title: 'Error!',
+            text: "Terjadi kesalahan, silahkan refresh halaman",
+            icon: 'error',
+          });
+          console.error(error);
+        });
+    
+    },
+  },
+
 };
 </script>
 
