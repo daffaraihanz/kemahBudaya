@@ -1,7 +1,7 @@
 <template >
   <div :class="{imagePosition: myListMainCategory.id%2 == 0}" class="main-category">
     <img v-if="myListMainCategory.icon_url == null" src="@/assets/dummyImage.png" alt />
-    <img v-else :src="myListMainCategory.icon_url" width="220px" height="220px" alt />
+    <img v-else v-lazy="myListMainCategory.icon_url" width="220px" height="220px" alt />
     <div class="box">
       <div
         :class="{numberPositionRight: myListMainCategory.id%2 == 1,numberPositionLeft: myListMainCategory.id%2 == 0 }"

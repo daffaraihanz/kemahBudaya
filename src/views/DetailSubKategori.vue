@@ -5,8 +5,8 @@
       <div class="mt-4">
         <img class="img-fluid" :src="gb_sampul" alt />
         <div class="mt-3 mini-image-wrapper">
-          <img style="width: 86px; height: 86px" v-if="hewan.gb_sampul" @click="set_sampul_source(hewan.gb_sampul)" :src="hewan.gb_sampul" alt />
-          <img style="width: 86px; height: 86px" v-if="hewan.gb_lainnya" @click="set_sampul_source(hewan.gb_lainnya)" :src="hewan.gb_lainnya" alt />
+          <img style="width: 86px; height: 86px" v-if="hewan.gb_sampul" @click="set_sampul_source(hewan.gb_sampul)" v-lazy="hewan.gb_sampul" alt />
+          <img style="width: 86px; height: 86px" v-if="hewan.gb_lainnya" @click="set_sampul_source(hewan.gb_lainnya)" v-lazy="hewan.gb_lainnya" alt />
           <!-- <img src="@/assets/dummyImage4.png" alt />
           <img src="@/assets/dummyImage4.png" alt /> -->
         </div>

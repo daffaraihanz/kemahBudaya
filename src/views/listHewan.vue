@@ -9,7 +9,7 @@
         
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
             <router-link :to="'/detailSubKategori/' + myListSubKategori.slug">
-                <img :src="myListSubKategori.gb_sampul" style="width: 86px; height: 86px" alt />
+                <img v-lazy="myListSubKategori.gb_sampul" style="width: 86px; height: 86px" alt />
             </router-link>
             <div class="card item rotate">
               <h5
@@ -52,7 +52,7 @@ export default {
     backBtn() {
       window.history.go(-1); return false;
     }, 
-  getData() {
+    getData() {
       const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
       let loader = this.$loading.show();
       axios.get(c.config.server_host + "/api/user/get-data-by-kategori-turunan/" + this.$route.params.id, {
