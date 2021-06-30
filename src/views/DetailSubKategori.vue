@@ -90,18 +90,18 @@ export default {
   methods: {
     putarSuara() {
 
-      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&hl=id-id&c=OGG&src="
-      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&hl=en-us&v=John&c=OGG&src="
+      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=id-id&c=OGG&src="
+      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&c=OGG&src="
       var audio;
       let loader = this.$loading.show();
 
       if(this.deskripsi_b_indo) {
-       audio  = new Audio(url_api_tts_indo + this.hewan.deskripsi_b_indo)
+       audio  = new Audio(url_api_tts_indo + encodeURI(this.hewan.deskripsi_b_indo) )
         console.log("Putar suara B Indo");
       }
 
       if(this.deskripsi_b_inggris) {
-        audio = new Audio(this.audioNarasi = url_api_tts_inggris + this.hewan.deskripsi_b_inggris)
+        audio = new Audio(this.audioNarasi = url_api_tts_inggris + encodeURI(this.hewan.deskripsi_b_inggris) )
         console.log("Putar suara B Inggris");
       }
 
