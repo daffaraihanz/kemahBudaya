@@ -30,7 +30,7 @@
 
       <iframe v-if="iframe_source" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :src="iframe_source" width="100%"></iframe>
 
-      <br><br>
+      <br><br><br>
 
       <div class="row w-100">
         <div class="col text-center justify-content-center">
