@@ -88,6 +88,10 @@ export default {
 
   mounted() {
     this.getData()
+    
+    setTimeout(() => {
+      this.putarSuara()
+    }, 1000);
   },
 
   methods: {
