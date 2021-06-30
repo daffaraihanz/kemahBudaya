@@ -97,23 +97,44 @@ export default {
   methods: {
     putarSuara() {
 
-      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-1&hl=id-id&c=OGG&src="
-      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&c=OGG&src="
-      var audio;
-      let loader = this.$loading.show();
+      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-1&hl=id-id&c=OGG&b64=true&src=" + encodeURI(this.hewan.deskripsi_b_indo)
+      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&b64=true&c=OGG&src=" + encodeURI(this.hewan.deskripsi_b_inggris)
+      var base_64_audio
+      var snd;
+
+      console.log("Memutar suara");
 
       if(this.deskripsi_b_indo) {
-       audio  = new Audio(url_api_tts_indo + encodeURI(this.hewan.deskripsi_b_indo) )
-        console.log("Putar suara B Indo");
+
+        if(sessionStorage.getItem(this.$route.params.slug + "_b_indo_") == null) {
+          axios.get(url_api_tts_indo).then(response => {
+            var data = response.data
+
+            // simpan ke session storage
+            sessionStorage.setItem(this.$route.params.slug + "_b_indo_", data)
+          })
+        }
+
+        base_64_audio = sessionStorage.getItem(this.$route.params.slug + "_b_indo_")
+        snd = new Audio(base_64_audio);
+        snd.play();
       }
 
       if(this.deskripsi_b_inggris) {
-        audio = new Audio(this.audioNarasi = url_api_tts_inggris + encodeURI(this.hewan.deskripsi_b_inggris) )
-        console.log("Putar suara B Inggris");
-      }
 
-      loader.hide()
-      audio.play();
+        if(sessionStorage.getItem(this.$route.params.slug + "_b_inggris_") == null) {
+          axios.get(url_api_tts_inggris).then(response => {
+            var data = response.data
+
+            // simpan ke session storage
+            sessionStorage.setItem(this.$route.params.slug + "_b_inggris_", data)
+          })
+        }
+
+        base_64_audio = sessionStorage.getItem(this.$route.params.slug + "_b_inggris_")
+        snd = new Audio(base_64_audio);
+        snd.play();
+      }
     },
     set_deskripsi_b_inggris() {
       this.deskripsi_b_indo = false
