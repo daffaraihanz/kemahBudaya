@@ -6,12 +6,12 @@
       </div>
       <div class="mt-5 mb-4">
         <div class="input-wrapper">
-          <p>Email</p>
-          <input type="text" v-model="email" placeholder="Masukkan email" />
+          <p>Username</p>
+          <input type="text" v-model="email" placeholder="Masukkan username" />
         </div>
         <div class="input-wrapper">
-          <p>Password</p>
-          <input type="text" v-model="password" placeholder="Masukkan Password" />
+          <p>PIN</p>
+          <input type="number" v-model="password" placeholder="Masukkan PIN" />
         </div>
       </div>
 

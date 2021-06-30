@@ -27,10 +27,13 @@
 
       </div>
 
+      <div class="card">
+        <div class="card-body p-2">
+            <iframe v-if="iframe_source" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :src="iframe_source" width="100%"></iframe>
+        </div>
+      </div>
 
-      <iframe v-if="iframe_source" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen :src="iframe_source" width="100%"></iframe>
-
-      <br><br><br>
+      <br><br>
 
       <div class="row w-100">
         <div class="col text-center justify-content-center">
@@ -90,7 +93,7 @@ export default {
   methods: {
     putarSuara() {
 
-      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=id-id&c=OGG&src="
+      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-1&hl=id-id&c=OGG&src="
       var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&c=OGG&src="
       var audio;
       let loader = this.$loading.show();
