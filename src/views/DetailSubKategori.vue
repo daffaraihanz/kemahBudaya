@@ -32,16 +32,21 @@
 
       <br><br>
 
-      <div class="d-flex mt-4 justify-content-center">
+      <div class="row w-100">
+        <div class="col text-center justify-content-center">
+            <div class="speakerWrapper">
+              <img @click.prevent="putarSuara" src="@/assets/speaker.svg" alt />
+            </div>
+          </div>
 
-        <div v-if="hewan.assets_suara_narator" class="speakerWrapper">
-          <img src="@/assets/speaker.svg" alt />
-        </div>
+          <div class="col text-center justify-content-center">
+            <div @click="set_deskripsi_b_indo" class="indoFlag"></div>
+          </div>
 
-        <div class="d-flex">
-          <div @click="set_deskripsi_b_indo" class="indoFlag"></div>
-          <div @click="set_deskripsi_b_inggris" class="englishFlag"></div>
-        </div>
+          <div class="col text-center justify-content-center">
+            <div @click="set_deskripsi_b_inggris" class="englishFlag"></div>
+          </div>
+
       </div>
 
       <!-- <br>
@@ -52,7 +57,6 @@
             bgcolor="#83DC9C"
             bordercolor="#30B755"
           /> -->
-
 
     </div>
   </section>
@@ -75,7 +79,7 @@ export default {
       deskripsi_b_indo: true,
       deskripsi_b_inggris: false,
       iframe_source: false,
-      gb_sampul: null,
+      gb_sampul: null
     }
   },
 
@@ -84,6 +88,26 @@ export default {
   },
 
   methods: {
+    putarSuara() {
+
+      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&hl=id-id&c=OGG&src="
+      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&hl=en-us&v=John&c=OGG&src="
+      var audio;
+      let loader = this.$loading.show();
+
+      if(this.deskripsi_b_indo) {
+       audio  = new Audio(url_api_tts_indo + this.hewan.deskripsi_b_indo)
+        console.log("Putar suara B Indo");
+      }
+
+      if(this.deskripsi_b_inggris) {
+        audio = new Audio(this.audioNarasi = url_api_tts_inggris + this.hewan.deskripsi_b_inggris)
+        console.log("Putar suara B Inggris");
+      }
+
+      loader.hide()
+      audio.play();
+    },
     set_deskripsi_b_inggris() {
       this.deskripsi_b_indo = false
       this.deskripsi_b_inggris = true
@@ -159,7 +183,7 @@ export default {
 }
 
 .indoFlag {
-  margin-right: 20px;
+  /* margin-right: 20px; */
   width: 66px;
   border-bottom: #d8d2e1 solid 6px;
   height: 66px;
