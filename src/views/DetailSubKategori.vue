@@ -35,7 +35,7 @@
       <div class="row w-100">
         <div class="col text-center justify-content-center">
             <div class="speakerWrapper">
-              <img @click.prevent="putarSuara" src="@/assets/speaker.svg" alt />
+              <img @click="putarSuara" src="@/assets/speaker.svg" alt />
             </div>
           </div>
 
