@@ -97,8 +97,8 @@ export default {
   methods: {
     putarSuara() {
 
-      var url_api_tts_indo = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-1&hl=id-id&c=OGG&b64=true&src=" + encodeURI(this.hewan.deskripsi_b_indo)
-      var url_api_tts_inggris = "http://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&b64=true&c=OGG&src=" + encodeURI(this.hewan.deskripsi_b_inggris)
+      var url_api_tts_indo = "https://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-1&hl=id-id&c=OGG&b64=true&src=" + encodeURI(this.hewan.deskripsi_b_indo)
+      var url_api_tts_inggris = "https://api.voicerss.org/?key=dc26c41dd12f46cabad6ebc20a435902&r=-3&hl=en-us&v=Amy&b64=true&c=OGG&src=" + encodeURI(this.hewan.deskripsi_b_inggris)
       var base_64_audio
       var snd;
 
