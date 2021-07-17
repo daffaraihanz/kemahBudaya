@@ -2,7 +2,7 @@
   <section class="login">
     <div class="container">
       <div class="text-center mt-5">
-        <img src="@/assets/logo.png" alt />
+        <img src="@/assets/Logo.webp" width="100%" alt />
       </div>
       <div class="mt-5 mb-4">
         <div class="input-wrapper">

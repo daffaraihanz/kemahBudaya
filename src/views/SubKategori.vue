@@ -20,14 +20,9 @@
             </div>
           </div>
 
-        <router-link to="/quiz">
-          <PrimaryButton
-            class="mt-5"
-            title="Mulai Kuis Sekarang"
-            bgcolor="#83DC9C"
-            bordercolor="#30B755"
-          />
-        </router-link>
+        <br><br>
+
+        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
         
       </div>
     </div>
@@ -35,13 +30,13 @@
 </template>
 
 <script>
-import PrimaryButton from "../components/PrimaryButton";
+//import PrimaryButton from "../components/PrimaryButton";
 import c from "@/config.js";
 import axios from "axios";
 
 export default {
   name: "SubKategori",
-  components: { PrimaryButton },
+  //components: { PrimaryButton },
   data: function() {
     return {
       // list: [
@@ -80,6 +75,45 @@ export default {
   },
 
   methods: {
+    mulaiKuiz() {
+      if(confirm("Apakah kamu ingin memulai kuiz?")) {
+
+        const headers = {
+          'Authorization': "Bearer " + sessionStorage.getItem("Eduwisata_token")
+        }
+        
+        let loader = this.$loading.show();
+        axios.post(c.config.server_host + "/api/user/mulai-kuiz", [], {
+            headers: headers
+          })
+          .then((response) => {
+              var data = response.data
+              loader.hide()
+
+              if(data.meta.short_msg == 'gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini_coba_lagi_besok') {
+                this.$swal({
+                  title: "Peringatan!",
+                  text: data.meta.message,
+                  icon: "warning"
+                });
+
+                return false;
+              }
+
+              if (data.meta.short_msg == 'berhasil_memulai_sesi_kuiz') {
+                localStorage.setItem('kuiz_mbah_serut', "Kuiz started at " + data.results.mulai_pada)
+                this.$router.push("/Quiz");
+              } else {
+                this.$swal({
+                  title: "Error!",
+                  text: "Terjadi kesalahan, gagal memulai kuiz",
+                  icon: "error"
+                });
+              }
+          })
+      }
+    },
+
     getKategoriUtama() {
       const AuthStr = "Bearer " + sessionStorage.getItem("Eduwisata_token");
       let loader = this.$loading.show();
@@ -104,7 +138,7 @@ export default {
           loader.hide();
           this.$swal({
             title: "Error!",
-            text: "Terjadi kesalahan, silahakn refresh halaman",
+            text: "Terjadi kesalahan, silahkan refresh halaman",
             icon: "error"
           });
           console.error(error);
@@ -194,5 +228,21 @@ h4 {
   color: #737295;
   font-family: "Montserrat";
   font-size: 18px;
+}
+
+.tombol-login {
+  /* margin-top: 40px; */
+  /* background-image: linear-gradient(#88b4fd, #619cfd); */
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  background-color: #83DC9C;
+  border-bottom-color: #30B755;
 }
 </style>

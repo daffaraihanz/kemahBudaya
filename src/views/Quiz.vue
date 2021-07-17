@@ -1,47 +1,70 @@
 <template>
   <section class="quiz">
     <div class="container">
-      <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
-      <div class="text-center question">
-        <img class="mt-4 img-fluid" src="@/assets/dummyImage3.png" alt />
-        <h2 class="mt-5 mb-4">Hewan apakah diatas ?</h2>
-        <template v-if="test == 1">
-          <div class="d-flex justify-content-between">
-            <button>Kucing</button>
-            <button>Kucing</button>
-          </div>
-          <div class="d-flex justify-content-between">
-            <button>Kucing</button>
-            <button>Kucing</button>
-          </div>
-        </template>
-        <template v-else-if="test == 2">
-          <div class="button-wrapper">
-            <PrimaryButton bordercolor="#DDEBFF" bgcolor="#fff" title="Kucing Jawa" />
-            <PrimaryButton bordercolor="#DDEBFF" bgcolor="#fff" title="Kucing Jawa" />
-            <PrimaryButton bordercolor="#DDEBFF" bgcolor="#fff" title="Kucing Jawa" />
-            <PrimaryButton bordercolor="#DDEBFF" bgcolor="#fff" title="Kucing Jawa" />
-          </div>
-        </template>
-        <template v-else>
-          <div class="d-flex justify-content-between">
-            <div class="image-wrapper">
-              <img src="@/assets/dummyImage5.png" alt />
+      
+      <!-- <img class="mt-5" src="@/assets/arrowLeft.svg" alt /> -->
+
+      <br>
+
+      <div class="text-center mt-2 question">
+
+        <img v-if="apakah_soal_sudah_habis" src="@/assets/Logo.webp" class="mt-4" width="100%" srcset="">
+
+        <img v-if="result.gb_soal" class="mt-4 img-fluid" :src="result.gb_soal" />
+
+        <h2 class="mt-5 mb-4">
+          {{result.soal}}
+        </h2>
+        
+        <div class="button-wrapper">
+
+            <!-- Jawaban 1 -->
+            <div v-if="result.jawaban1">
+              <button @click="submitJawaban(result.jawaban1)" style="height: 200px; overflow-y: auto" v-if="is_url(result.jawaban1)" class="tombol-login" type="button">
+                <img @click="submitJawaban(result.jawaban1)" width="200px" :src="result.jawaban1">
+              </button>
+
+              <button v-else @click="submitJawaban(result.jawaban1)" class="tombol-login" type="button">
+                <span @click="submitJawaban(result.jawaban1)">{{result.jawaban1}}</span>
+              </button>
             </div>
-            <div class="image-wrapper">
-              <img src="@/assets/dummyImage5.png" alt />
+
+            <!-- Jawaban 2 -->
+            <div v-if="result.jawaban2">
+              <button @click="submitJawaban(result.jawaban2)" style="height: 200px; overflow-y: auto" v-if="is_url(result.jawaban2)" class="tombol-login" type="button">
+                <img @click="submitJawaban(result.jawaban2)" width="200px" :src="result.jawaban2">
+              </button>
+
+              <button v-else @click="submitJawaban(result.jawaban2)" class="tombol-login" type="button">
+                <span @click="submitJawaban(result.jawaban2)">{{result.jawaban2}}</span>
+              </button>
             </div>
-          </div>
-          <div class="d-flex justify-content-between mt-3">
-            <div class="image-wrapper">
-              <img src="@/assets/dummyImage5.png" alt />
+
+            <!-- Jawaban 3 -->
+            <div v-if="result.jawaban3">
+              <button @click="submitJawaban(result.jawaban3)" style="height: 200px; overflow-y: auto" v-if="is_url(result.jawaban3)" class="tombol-login" type="button">
+                <img @click="submitJawaban(result.jawaban3)" width="200px" :src="result.jawaban3">
+              </button>
+
+              <button v-else @click="submitJawaban(result.jawaban3)" class="tombol-login" type="button">
+                <span @click="submitJawaban(result.jawaban3)">{{result.jawaban3}}</span>
+              </button>
             </div>
-            <div class="image-wrapper">
-              <img src="@/assets/dummyImage5.png" alt />
+
+            <!-- Jawaban 4 -->
+            <div v-if="result.jawaban4">
+              <button @click="submitJawaban(result.jawaban4)" style="height: 200px; overflow-y: auto" v-if="is_url(result.jawaban4)" class="tombol-login" type="button">
+                <img width="200px" :src="result.jawaban4">
+              </button>
+
+              <button @click="submitJawaban(result.jawaban4)" v-else class="tombol-login" type="button">
+                <span @click="submitJawaban(result.jawaban4)">{{result.jawaban4}}</span>
+              </button>
             </div>
-          </div>
-        </template>
-        <div class="pagination">
+
+        </div>
+
+        <!-- <div class="pagination">
           <div class="paginationWrapper">
             <img src="@/assets/quizArrowLeft.svg" alt />
           </div>
@@ -52,25 +75,171 @@
           <div class="paginationWrapper">
             <img src="@/assets/quizArrowRight.svg" alt />
           </div>
-        </div>
+        </div> -->
+
+        <br><br>
+        <button v-if="!apakah_soal_sudah_habis" @click="getSoalSecaraAcak()" class="soallain" type="button">Soal lainnya</button>
+        <button v-if="apakah_soal_sudah_habis" @click="akhiriKuiz()" class="soallain" type="button">Akhiri Kuis</button>
+
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import PrimaryButton from "../components/PrimaryButton";
+//import PrimaryButton from "../components/PrimaryButton";
+import c from "@/config.js"
+import axios from 'axios'
 
 export default {
   name: "Quiz",
   components: {
-    PrimaryButton
+    //PrimaryButton
   },
   data: function() {
     return {
-      test: 2
+      result: {
+        gb_soal: null,
+        jawaban1: null,
+        jawaban2: null,
+        jawaban3: null,
+        jawaban4: null,
+        soal: null,
+        id: null,
+        is_active: null
+      },
+      apakah_soal_sudah_habis: false
     };
-  }
+  },
+
+  methods: {
+    akhiriKuiz() {
+      if (!confirm("Apakah kamu ingin mengakhiri kuiz?")) {
+        console.log("Batal mengakhiri kuis");
+        return false;
+      }
+
+      const headers = {
+          'Authorization': "Bearer " + sessionStorage.getItem("Eduwisata_token")
+        }
+        
+        let loader = this.$loading.show();
+        axios.post(c.config.server_host + "/api/user/akhiri-kuiz", [], {
+            headers: headers
+          })
+          .then((response) => {
+              var data = response.data
+              loader.hide()
+
+              if(data.meta.short_msg == "berhasil_mengakhiri_sesi_kuiz") {
+                localStorage.removeItem('kuiz_mbah_serut')
+
+                this.$swal({
+                  title: "Berhasil!",
+                  text: "Terima kasih telah mengikuti kuiz, sampai jumpa kuis di esok hari",
+                  icon: "success"
+                });
+
+                this.$router.push("/home");
+              } else {
+                this.$swal({
+                  title: "Error!",
+                  text: "Terjadi kesalahan, gagal memulai kuiz",
+                  icon: "error"
+                });
+              }
+          })
+    },
+
+    submitJawaban(value) {
+      console.log(value)
+
+        const headers = {'Authorization': "Bearer " + sessionStorage.getItem("Eduwisata_token")}
+        const bodyRequest = {
+          id_soal: this.result.id,
+          jawaban: value
+        }
+
+        let loader = this.$loading.show();
+        axios.post(c.config.server_host + "/api/user/submit-jawaban-kuiz", bodyRequest, {
+            headers: headers
+          })
+          .then((response) => {
+              var data = response.data
+              loader.hide()
+              console.log(data);
+
+              if(data.results.apakah_jawaban_benar == true) {
+                this.getSoalSecaraAcak()
+              } else if (data.results.apakah_jawaban_benar == false) {
+                
+                this.$swal({
+                  title: "Salah!",
+                  text: "Maaf jawaban kamu salah",
+                  icon: "warning"
+                });
+
+                this.getSoalSecaraAcak()
+              } else {
+                this.getSoalSecaraAcak()
+              }
+          })
+
+    },
+    is_url(str) {
+      var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+        '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+        '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+        '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+      return !!pattern.test(str);
+    },
+
+    cekSesiKuiz() {
+      if(localStorage.getItem('kuiz_mbah_serut') == '' || localStorage.getItem('kuiz_mbah_serut') == null) {
+        this.$swal({
+            title: "Error!",
+            text: "Tidak ada sesi kuiz aktif sekarang",
+            icon: "error"
+          });
+        window.history.go(-1); return false;
+      }
+
+      this.getSoalSecaraAcak()
+    },
+
+    getSoalSecaraAcak() {
+      const headers = {
+        'Authorization': "Bearer " + sessionStorage.getItem("Eduwisata_token")
+      }
+
+      let loader = this.$loading.show();
+      axios.get(c.config.server_host + "/api/user/get-soal-secara-acak", {
+          headers: headers
+        })
+        .then((response) => {
+          var data = response.data
+          console.log(data);
+
+          if(data.meta.short_msg == "soal_sudah_habis_segera_akhir_sesi_kuiz") {
+            this.apakah_soal_sudah_habis = true
+            this.$swal({
+              title: "Peringatan!",
+              text: "Kamu sudah menjawab semua soal, segera akhiri kuiz",
+              icon: "warning"
+            });
+          }
+
+          loader.hide()
+          this.result = data.results
+        })
+    }
+  },
+
+  mounted() {
+    this.cekSesiKuiz()
+  },
 };
 </script>
 
@@ -153,5 +322,38 @@ h2 {
   color: #100f37;
   font-weight: 700;
   font-size: 24px;
+}
+
+.tombol-login {
+  /* margin-top: 40px; */
+  /* background-image: linear-gradient(#88b4fd, #619cfd); */
+  color: #737295;
+  font-weight: 700;
+  font-size: 17px;
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  background-color: #fff;
+  border-bottom-color: #DDEBFF;
+}
+
+
+.soallain {
+  /* margin-top: 40px; */
+  /* background-image: linear-gradient(#88b4fd, #619cfd); */
+  color: white;
+  font-weight: 700;
+  font-size: 17px;
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+  border: none;
+  border-bottom-style: solid;
+  border-bottom-width: 6px;
+  background-color: #83DC9C;
+  border-bottom-color: #30B755;
 }
 </style>
