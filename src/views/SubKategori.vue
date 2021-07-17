@@ -10,10 +10,11 @@
         <h2>{{judul_sub_kategori}}</h2>
       </div>
       <div>
-        <h4 class="mt-4">Ayo lihat semua hewan yang ada</h4>
+        <h4 class="mt-4">Ayo lihat semua yang ada disini</h4>
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
             <router-link :to="'/list-hewan/' + myListSubKategori.id">
-              <img v-lazy="'https://via.placeholder.com/150/30B755/ffffff/?text=' + (myListSubKategori.nama).charAt(0)" style="width: 135px; height: 140px" alt />
+              <img v-if="!myListSubKategori.icon_url" v-lazy="'https://via.placeholder.com/150/30B755/ffffff/?text=' + (myListSubKategori.nama).charAt(0)" style="width: 135px; height: 140px" alt />
+              <img v-else :src="myListSubKategori.icon_url" style="width: 135px; height: 140px" alt />
             </router-link>
             <div class="card item rotate">
                 <h5 :style="{color: '#' + myColor(myListSubKategori.id)}">{{ myListSubKategori.nama }}</h5>

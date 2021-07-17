@@ -5,7 +5,7 @@
         <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
 
       <div>
-        <h4 class="mt-4">Ayo lihat semua hewan yang ada</h4>
+        <h4 class="mt-4">Ayo lihat semua yang ada disini</h4>
         
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
             <router-link :to="'/detailSubKategori/' + myListSubKategori.slug">
