@@ -38,7 +38,7 @@ export default {
         .then(response => {
           var data = response.data.results;
           console.log(data);
-          this.list = data;
+          // this.list = data;
           loader.hide();
         })
         .catch(error => {
@@ -59,33 +59,44 @@ export default {
   data: function() {
     return {
       name: null,
-      // list: [
-      //   {
-      //     id: 1,
-      //     title: "Taman Reptil"
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "Kebun Bibit"
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "Edukasi Pertanian"
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "Demplot"
-      //   },
-      //   {
-      //     id: 5,
-      //     title: "Omah Budaya"
-      //   },
-      //   {
-      //     id: 6,
-      //     title: "Panembahan"
-      //   }
-      // ]
-      list: []
+      list: [
+        {
+          id: 1,
+          title: "Taman Reptil",
+          image: "img/TAMANREPTILE.e7a17fb8.svg"
+        },
+        {
+          id: 2,
+          title: "Kebun Bibit",
+          image: "img/KEBUNBIBIT.e87db4c0.svg"
+        },
+        {
+          id: 3,
+          title: "Demplot",
+          image: "img/DEMPLOT.5de57575.svg"
+        },
+        {
+          id: 4,
+          title: "Omah Budaya",
+          image: "img/OMAHBUDAYA.a30ec04d.svg"
+        },
+        {
+          id: 5,
+          title: "Salur",
+          image: "img/SALUR.c7fe42b1.svg"
+        },
+        {
+          id: 6,
+          title: "Panembahan",
+          image: "img/PANEMBAHAN.2e8c569e.svg"
+        },
+        {
+          id: 7,
+          title: "Padepokan",
+          image: "img/EBEG.531dd4a1.svg"
+        }
+      ]
+      // list: []
     };
   }
 };

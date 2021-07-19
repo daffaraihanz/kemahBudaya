@@ -40,7 +40,6 @@ export default {
     // this.cek_desktop_atau_hp();
   },
   methods: {
-<<<<<<< HEAD
     // cek_desktop_atau_hp() {
     //   var isMobile = {
     //     Android: function() {
@@ -76,7 +75,6 @@ export default {
     //     this.$router.push("/desktop_not_allowed");
     //   }
     // },
-=======
     cek_desktop_atau_hp() {
       var isMobile = {
         Android: function() {
@@ -112,7 +110,6 @@ export default {
         //this.$router.push("/desktop_not_allowed");
       }
     },
->>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
 
     cek_koneksi_internet() {
       if (!navigator.onLine) {

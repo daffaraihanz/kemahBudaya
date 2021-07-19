@@ -3,7 +3,6 @@
     <div class="container">
       <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
-<<<<<<< HEAD
         <img class="img-fluid" src="@/assets/dummyImage3.png" alt />
         <!-- <lottie-animation
           ref="anim"
@@ -17,7 +16,6 @@
         />-->
         <div class="mt-3 mini-image-wrapper">
           <img src="@/assets/dummyImage4.png" alt />
-=======
         <!-- Sampul -->
         <img v-if="!gb_sampul_lottie_path" class="img-fluid" :src="gb_sampul" alt />
         <lottie-animation v-if="gb_sampul_lottie_path" :path="gb_sampul_lottie_path" :loop="true" :autoPlay="true" :loopDelayMin="2.5" :loopDelayMax="5" :speed="1" width="100%" height="100%" />
@@ -40,7 +38,6 @@
         </div>
 
         <!-- <div class="mt-3 mini-image-wrapper">  
->>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
           <img src="@/assets/dummyImage4.png" alt />
           <img src="@/assets/dummyImage4.png" alt />
         </div> -->
@@ -101,25 +98,16 @@
 </template>
 
 <script>
-<<<<<<< HEAD
 import PrimaryButton from "../components/PrimaryButton";
 // import LottieAnimation from "lottie-web-vue"; // import lottie-web-vue
-=======
 import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue"; // import lottie-vuejs
-//import PrimaryButton from "../components/PrimaryButton";
-import c from "@/config.js"
-import axios from 'axios'
->>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
+import c from "@/config.js";
+import axios from 'axios';
 
 export default {
   components: {
-<<<<<<< HEAD
-    PrimaryButton
-    // LottieAnimation
-  }
-=======
+    PrimaryButton,
     LottieAnimation
-    // PrimaryButton
   },
   name: "DetailSubKategori",
   data() {
@@ -240,7 +228,6 @@ export default {
     },
   },
 
->>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
 };
 </script>
 
