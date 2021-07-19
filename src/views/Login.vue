@@ -2,16 +2,16 @@
   <section class="login">
     <div class="container">
       <div class="text-center mt-5">
-        <img src="@/assets/logo.png" alt />
+        <img src="@/assets/Logo.webp" width="100%" alt />
       </div>
       <div class="mt-5 mb-4">
         <div class="input-wrapper">
-          <p>Email</p>
-          <input type="text" v-model="email" placeholder="Masukkan email" />
+          <p>Username</p>
+          <input type="text" v-model="email" placeholder="Masukkan username" />
         </div>
         <div class="input-wrapper">
-          <p>Password</p>
-          <input type="text" v-model="password" placeholder="Masukkan Password" />
+          <p>PIN</p>
+          <input type="number" v-model="password" placeholder="Masukkan PIN" />
         </div>
       </div>
 
@@ -40,6 +40,7 @@ export default {
     // this.cek_desktop_atau_hp();
   },
   methods: {
+<<<<<<< HEAD
     // cek_desktop_atau_hp() {
     //   var isMobile = {
     //     Android: function() {
@@ -75,6 +76,43 @@ export default {
     //     this.$router.push("/desktop_not_allowed");
     //   }
     // },
+=======
+    cek_desktop_atau_hp() {
+      var isMobile = {
+        Android: function() {
+          return navigator.userAgent.match(/Android/i);
+        },
+        BlackBerry: function() {
+          return navigator.userAgent.match(/BlackBerry/i);
+        },
+        iOS: function() {
+          return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+        },
+        Opera: function() {
+          return navigator.userAgent.match(/Opera Mini/i);
+        },
+        Windows: function() {
+          return (
+            navigator.userAgent.match(/IEMobile/i) ||
+            navigator.userAgent.match(/WPDesktop/i)
+          );
+        },
+        any: function() {
+          return (
+            isMobile.Android() ||
+            isMobile.BlackBerry() ||
+            isMobile.iOS() ||
+            isMobile.Opera() ||
+            isMobile.Windows()
+          );
+        }
+      };
+
+      if (!isMobile.any()) {
+        //this.$router.push("/desktop_not_allowed");
+      }
+    },
+>>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
 
     cek_koneksi_internet() {
       if (!navigator.onLine) {

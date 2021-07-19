@@ -38,9 +38,15 @@ export default {
   //         }
   //     };
 
+<<<<<<< HEAD
   //     if( !isMobile.any() ) {
   //       this.$router.push('/desktop_not_allowed')
   //     }
+=======
+        if( !isMobile.any() && (location.hostname != "localhost" || location.hostname != "127.0.0.1" || location.hostname === "")) {
+          this.$router.push('/desktop_not_allowed')
+        }
+>>>>>>> c55403dd35dacf68bca3bac6f15dd2488eea0e51
 
   //   },
 

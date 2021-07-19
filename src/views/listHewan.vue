@@ -1,30 +1,26 @@
 <template>
   <section class="subKategori">
     <div class="container">
-      <router-link to="/home">
-        <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
-      </router-link>
+      
+        <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
 
-      <div class="title mt-4">
-        <h2>Sekarang kamu lagi di,</h2>
-        <h2>{{judul_sub_kategori}}</h2>
-      </div>
       <div>
         <h4 class="mt-4">Ayo lihat semua yang ada disini</h4>
+        
           <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
-            <router-link :to="'/list-hewan/' + myListSubKategori.id">
-              <img v-if="!myListSubKategori.icon_url" v-lazy="'https://via.placeholder.com/150/30B755/ffffff/?text=' + (myListSubKategori.nama).charAt(0)" style="width: 135px; height: 140px" alt />
-              <img v-else :src="myListSubKategori.icon_url" style="width: 135px; height: 140px" alt />
+            <router-link :to="'/detailSubKategori/' + myListSubKategori.slug">
+                <img v-lazy="myListSubKategori.gb_sampul" style="width: 86px; height: 86px" alt />
             </router-link>
             <div class="card item rotate">
-                <h5 :style="{color: '#' + myColor(myListSubKategori.id)}">{{ myListSubKategori.nama }}</h5>
+              <h5
+                :style="{color: '#' + myColor(myListSubKategori.id)}"
+              >{{ myListSubKategori.nama }}</h5>
             </div>
           </div>
-
-        <br><br>
-
-        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
         
+        <br><br>
+        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
+
       </div>
     </div>
   </section>
@@ -32,47 +28,20 @@
 
 <script>
 //import PrimaryButton from "../components/PrimaryButton";
-import c from "@/config.js";
-import axios from "axios";
+import c from "@/config.js"
+import axios from 'axios'
 
 export default {
-  name: "SubKategori",
+  name: "List Hewan",
   //components: { PrimaryButton },
   data: function() {
     return {
-      // list: [
-      //   {
-      //     id: 1,
-      //     title: "Taman Reptil"
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "Kebun Bibit"
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "Edukasi Pertanian"
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "Demplot"
-      //   },
-      //   {
-      //     id: 5,
-      //     title: "Omah Budaya"
-      //   },
-      //   {
-      //     id: 6,
-      //     title: "Panembahan"
-      //   }
-      // ]
       list: [],
-      judul_sub_kategori: null
     };
   },
 
   mounted() {
-    this.getKategoriUtama();
+    this.getData()
   },
 
   methods: {
@@ -91,7 +60,7 @@ export default {
               var data = response.data
               loader.hide()
 
-              if(data.meta.short_msg == 'gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini_coba_lagi_besok') {
+              if(data.meta.short_msg == 'gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini') {
                 this.$swal({
                   title: "Peringatan!",
                   text: data.meta.message,
@@ -118,39 +87,32 @@ export default {
           })
       }
     },
-
-    getKategoriUtama() {
-      const AuthStr = "Bearer " + sessionStorage.getItem("Eduwisata_token");
+    backBtn() {
+      window.history.go(-1); return false;
+    }, 
+    getData() {
+      const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
       let loader = this.$loading.show();
-      axios
-        .get(
-          c.config.server_host +
-            "/api/user/get-kategori-turunan-by-kategori-utama/" +
-            this.$route.params.id,
-          {
-            headers: {
-              Authorization: AuthStr
-            }
+      axios.get(c.config.server_host + "/api/user/get-data-by-kategori-turunan/" + this.$route.params.id, {
+          headers: {
+            Authorization: AuthStr
           }
-        )
-        .then(response => {
-          var data = response.data.results;
+        }).then(response => {
+          var data = (response.data.results)
           console.log(data);
-          this.list = data;
-          loader.hide();
+          this.list = data
+          loader.hide()
         })
-        .catch(error => {
-          loader.hide();
+        .catch((error) => {
+          loader.hide()
           this.$swal({
-            title: "Error!",
+            title: 'Error!',
             text: "Terjadi kesalahan, silahkan refresh halaman",
-            icon: "error"
+            icon: 'error',
           });
           console.error(error);
         });
-
-      var judul_sub_kategori = sessionStorage.getItem("judulSubKategori");
-      this.judul_sub_kategori = judul_sub_kategori;
+    
     },
 
     myColor(id) {
@@ -199,11 +161,11 @@ export default {
 h5 {
   margin: 0;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 16px;
 }
 
 .subKategori .card h5 {
-  line-height: 120px;
+  line-height: 64px;
 }
 
 .subKategori .card {
@@ -214,7 +176,7 @@ h5 {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   border: none;
-  height: 120px;
+  height: 64px;
 }
 
 .title h2:nth-child(1) {
