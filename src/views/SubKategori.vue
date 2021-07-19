@@ -104,6 +104,9 @@ export default {
               if (data.meta.short_msg == 'berhasil_memulai_sesi_kuiz') {
                 localStorage.setItem('kuiz_mbah_serut', "Kuiz started at " + data.results.mulai_pada)
                 this.$router.push("/Quiz");
+              } else if (data.meta.short_msg == "gagal_memulai_kuiz_baru_karena_masih_ada_kuiz_yang_belum_selesai_hari_ini") {
+                localStorage.setItem('kuiz_mbah_serut', "Kuiz started at now")
+                this.$router.push("/Quiz");
               } else {
                 this.$swal({
                   title: "Error!",
@@ -111,6 +114,7 @@ export default {
                   icon: "error"
                 });
               }
+
           })
       }
     },
