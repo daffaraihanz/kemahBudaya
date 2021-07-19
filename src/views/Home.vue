@@ -3,9 +3,7 @@
     <div class="container">
       <div class="greeting mt-4">
         <h2>Halo</h2>
-        <h2>
-          {{name}}
-        </h2>
+        <h2>{{name}}</h2>
       </div>
       <div>
         <h4 class="mt-4">Mari berwisata di tempat ini</h4>
@@ -21,40 +19,42 @@
 
 <script>
 import MainCategory from "../components/MainCategory";
-import c from "@/config.js"
-import axios from 'axios'
+import c from "@/config.js";
+import axios from "axios";
 
 export default {
   name: "Home",
   components: { MainCategory },
   methods: {
     getKategoriUtama() {
-      const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
+      const AuthStr = "Bearer " + sessionStorage.getItem("Eduwisata_token");
       let loader = this.$loading.show();
-      axios.get(c.config.server_host + "/api/user/kategori-utama", {
+      axios
+        .get(c.config.server_host + "/api/user/kategori-utama", {
           headers: {
             Authorization: AuthStr
           }
-        }).then(response => {
-          var data = (response.data.results)
-          console.log(data);
-          this.list = data
-          loader.hide()
         })
-        .catch((error) => {
-          loader.hide()
+        .then(response => {
+          var data = response.data.results;
+          console.log(data);
+          this.list = data;
+          loader.hide();
+        })
+        .catch(error => {
+          loader.hide();
           this.$swal({
-            title: 'Error!',
+            title: "Error!",
             text: "Terjadi kesalahan, silahkan refresh halaman",
-            icon: 'error',
+            icon: "error"
           });
           console.error(error);
         });
     }
   },
   mounted() {
-    this.getKategoriUtama()
-    this.name = sessionStorage.getItem('Eduwisata_user_name')
+    this.getKategoriUtama();
+    this.name = sessionStorage.getItem("Eduwisata_user_name");
   },
   data: function() {
     return {

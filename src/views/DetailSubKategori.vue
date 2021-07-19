@@ -4,6 +4,16 @@
       <img class="mt-5" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
         <img class="img-fluid" src="@/assets/dummyImage3.png" alt />
+        <!-- <lottie-animation
+          ref="anim"
+          :animationData="require('@/assets/lottie/online-shopping.json')"
+          :loop="true"
+          :autoPlay="true"
+          :speed="1"
+          @loopComplete="loopComplete"
+          @complete="complete"
+          @enterFrame="enterFrame"
+        />-->
         <div class="mt-3 mini-image-wrapper">
           <img src="@/assets/dummyImage4.png" alt />
           <img src="@/assets/dummyImage4.png" alt />
@@ -35,10 +45,13 @@
 
 <script>
 import PrimaryButton from "../components/PrimaryButton";
+// import LottieAnimation from "lottie-web-vue"; // import lottie-web-vue
+
 export default {
   name: "DetailSubKategori",
   components: {
     PrimaryButton
+    // LottieAnimation
   }
 };
 </script>
