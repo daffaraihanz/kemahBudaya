@@ -3,13 +3,32 @@
     <div class="container">
       <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
-        <img class="img-fluid" :src="gb_sampul" alt />
-        <div class="mt-3 mini-image-wrapper">
-          <img style="width: 86px; height: 86px" v-if="hewan.gb_sampul" @click="set_sampul_source(hewan.gb_sampul)" v-lazy="hewan.gb_sampul" alt />
-          <img style="width: 86px; height: 86px" v-if="hewan.gb_lainnya" @click="set_sampul_source(hewan.gb_lainnya)" v-lazy="hewan.gb_lainnya" alt />
-          <!-- <img src="@/assets/dummyImage4.png" alt />
-          <img src="@/assets/dummyImage4.png" alt /> -->
+        <!-- Sampul -->
+        <img v-if="!gb_sampul_lottie_path" class="img-fluid" :src="gb_sampul" alt />
+        <lottie-animation v-if="gb_sampul_lottie_path" :path="gb_sampul_lottie_path" :loop="true" :autoPlay="true" :loopDelayMin="2.5" :loopDelayMax="5" :speed="1" width="100%" height="100%" />
+        <!-- Sampul -->
+
+        <div class="row mt-4">
+          <div class="col-4" v-if="hewan.gb_sampul">
+            <img style="width: 86px; height: 86px" @click="set_sampul_source(hewan.gb_sampul)" v-lazy="hewan.gb_sampul" alt />
+          </div>
+
+          <div class="col-4" v-if="hewan.gb_lainnya">
+            <img style="width: 86px; height: 86px" @click="set_sampul_source(hewan.gb_lainnya)" v-lazy="hewan.gb_lainnya" alt />
+          </div>
+
+          <div class="col-4" v-if="hewan.gb_lottie">
+            <div @click="set_sampul_source('lottie_files/' + hewan.gb_lottie, true)" class="w-100" style="height: 100%; position: relative; z-index: 9999">
+              <lottie-animation @click="set_sampul_source('lottie_files/' + hewan.gb_lottie, true)" path="lottie_files/example_lottie.json" :loop="false" :autoPlay="false" :loopDelayMin="2.5" :loopDelayMax="5" :speed="1" :width="86" :height="86" />
+            </div>
+          </div>
         </div>
+
+        <!-- <div class="mt-3 mini-image-wrapper">  
+          <img src="@/assets/dummyImage4.png" alt />
+          <img src="@/assets/dummyImage4.png" alt />
+        </div> -->
+
       </div>
       <div class="mt-5 content">
         <h2>
@@ -66,13 +85,14 @@
 </template>
 
 <script>
-
+import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue"; // import lottie-vuejs
 //import PrimaryButton from "../components/PrimaryButton";
 import c from "@/config.js"
 import axios from 'axios'
 
 export default {
   components: {
+    LottieAnimation
     // PrimaryButton
   },
   name: "DetailSubKategori",
@@ -82,7 +102,8 @@ export default {
       deskripsi_b_indo: true,
       deskripsi_b_inggris: false,
       iframe_source: false,
-      gb_sampul: null
+      gb_sampul: null,
+      gb_sampul_lottie_path: null
     }
   },
 
@@ -147,8 +168,14 @@ export default {
     backBtn() {
       window.history.go(-1); return false;
     },
-    set_sampul_source(link_gambar) {
-      this.gb_sampul = link_gambar
+    set_sampul_source(link_gambar, is_lottie = false) {
+      if(!is_lottie) {
+        this.gb_sampul = link_gambar
+        this.gb_sampul_lottie_path = null
+      } else {
+        this.gb_sampul_lottie_path = link_gambar
+        this.gb_sampul = null
+      }
     },
     getData() {
       const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
@@ -230,7 +257,7 @@ export default {
   border-radius: 20px;
 }
 
-.mini-image-wrapper img {
+.mini-image-wrapper img, .mini-image-wrapper svg {
   margin-right: 20px;
 }
 
