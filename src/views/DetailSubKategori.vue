@@ -131,7 +131,7 @@
 </template>
 
 <script>
-// import PrimaryButton from "../components/PrimaryButton";
+//import PrimaryButton from "../components/PrimaryButton";
 // import LottieAnimation from "lottie-web-vue"; // import lottie-web-vue
 import LottieAnimation from "lottie-vuejs/src/LottieAnimation.vue"; // import lottie-vuejs
 import c from "@/config.js";
@@ -139,7 +139,7 @@ import axios from "axios";
 
 export default {
   components: {
-    // PrimaryButton,
+    //PrimaryButton,
     LottieAnimation
   },
   name: "DetailSubKategori",
