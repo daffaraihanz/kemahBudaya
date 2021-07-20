@@ -63,37 +63,37 @@ export default {
         {
           id: 1,
           title: "Taman Reptil",
-          image: "img/TAMANREPTILE.e7a17fb8.svg"
+          image: "/img/svg/TAMANREPTILE.svg"
         },
         {
           id: 2,
           title: "Kebun Bibit",
-          image: "img/KEBUNBIBIT.e87db4c0.svg"
+          image: "/img/svg/KEBUNBIBIT.svg"
         },
         {
           id: 3,
           title: "Demplot",
-          image: "img/DEMPLOT.5de57575.svg"
+          image: "/img/svg/DEMPLOT.svg"
         },
         {
           id: 4,
           title: "Omah Budaya",
-          image: "img/OMAHBUDAYA.a30ec04d.svg"
+          image: "/img/svg/OMAHBUDAYA.svg"
         },
+        // {
+        //   id: 5,
+        //   title: "Salur",
+        //   image: "/img/svg/SALUR.c7fe42b1.svg"
+        // },
         {
           id: 5,
-          title: "Salur",
-          image: "img/SALUR.c7fe42b1.svg"
+          title: "Panembahan",
+          image: "/img/svg/PANEMBAHAN.svg"
         },
         {
           id: 6,
-          title: "Panembahan",
-          image: "img/PANEMBAHAN.2e8c569e.svg"
-        },
-        {
-          id: 7,
           title: "Padepokan",
-          image: "img/EBEG.531dd4a1.svg"
+          image: "/img/svg/EBEG.svg"
         }
       ]
       // list: []
