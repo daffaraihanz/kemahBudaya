@@ -3,7 +3,7 @@
     <div class="container">
       <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
       <div class="mt-4">
-        <img class="img-fluid" src="@/assets/dummyImage3.png" alt />
+        <!-- <img class="img-fluid" src="@/assets/dummyImage3.png" alt /> -->
         <!-- <lottie-animation
           ref="anim"
           :animationData="require('@/assets/lottie/online-shopping.json')"
@@ -15,10 +15,11 @@
           @enterFrame="enterFrame"
         />-->
         <div class="mt-3 mini-image-wrapper">
-          <img src="@/assets/dummyImage4.png" alt />
+          <!-- <img src="@/assets/dummyImage4.png" alt /> -->
           <!-- Sampul -->
-          <img v-if="!gb_sampul_lottie_path" class="img-fluid" :src="gb_sampul" alt />
+          <img v-if="!gb_sampul_lottie_path" class="img-fluid firstImage" :src="gb_sampul" alt />
           <lottie-animation
+            class="lottieImage"
             v-if="gb_sampul_lottie_path"
             :path="gb_sampul_lottie_path"
             :loop="true"
@@ -31,32 +32,38 @@
           />
           <!-- Sampul -->
 
-          <div class="row mt-4">
-            <div class="col-4" v-if="hewan.gb_sampul">
+          <div class="row mt-4 secondImage">
+            <div class="col-3" v-if="hewan.gb_sampul">
               <img
-                style="width: 86px; height: 86px"
+                class="img-fluid"
                 @click="set_sampul_source(hewan.gb_sampul)"
                 v-lazy="hewan.gb_sampul"
                 alt
               />
             </div>
-
-            <div class="col-4" v-if="hewan.gb_lainnya">
+            <div class="col-3" v-if="hewan.gb_lainnya">
               <img
-                style="width: 86px; height: 86px"
+                class="img-fluid"
                 @click="set_sampul_source(hewan.gb_lainnya)"
                 v-lazy="hewan.gb_lainnya"
                 alt
               />
             </div>
-
-            <div class="col-4" v-if="hewan.gb_lottie">
+            <div class="col-3" v-if="hewan.gb_lainnya">
+              <img
+                class="img-fluid"
+                @click="set_sampul_source(hewan.gb_lainnya)"
+                v-lazy="hewan.gb_lainnya"
+                alt
+              />
+            </div>
+            <div class="col-3" v-if="hewan.gb_lottie">
               <div
                 @click="set_sampul_source('lottie_files/' + hewan.gb_lottie, true)"
-                class="w-100"
-                style="height: 100%; position: relative; z-index: 9999"
+                class="w-100 lottieImage"
               >
                 <lottie-animation
+                  class="img-fluid"
                   @click="set_sampul_source('lottie_files/' + hewan.gb_lottie, true)"
                   path="lottie_files/example_lottie.json"
                   :loop="false"
@@ -284,6 +291,23 @@ export default {
 </script>
 
 <style scoped>
+.secondImage .lottieImage {
+  width: 100%;
+  height: 60px;
+}
+
+.secondImage img {
+  width: 100%;
+  height: 60px;
+  border-radius: 20px;
+}
+
+.firstImage,
+.lottieImage {
+  width: 100%;
+  height: 250px;
+  border-radius: 20px;
+}
 .speakerWrapper {
   width: 66px;
   height: 66px;
