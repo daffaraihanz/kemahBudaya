@@ -1,26 +1,27 @@
 <template>
   <section class="subKategori">
     <div class="container">
-      
-        <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
+      <img class="mt-5" @click="backBtn" src="@/assets/arrowLeft.svg" alt />
 
       <div>
-        <h4 class="mt-4">Ayo lihat semua yang ada disini</h4>
-        
-          <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
-            <router-link :to="'/detailSubKategori/' + myListSubKategori.slug">
-                <img v-lazy="myListSubKategori.gb_sampul" style="width: 86px; height: 86px" alt />
-            </router-link>
-            <div class="card item rotate">
-              <h5
-                :style="{color: '#' + myColor(myListSubKategori.id)}"
-              >{{ myListSubKategori.nama }}</h5>
-            </div>
-          </div>
-        
-        <br><br>
-        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
+        <h4 class="mt-4 mb-4">Ayo lihat semua yang ada disini</h4>
 
+        <div v-for="myListSubKategori in list" :key="myListSubKategori.id" class="card-wrapper">
+          <router-link :to="'/detailSubKategori/' + myListSubKategori.slug">
+            <div class="d-flex align-items-center cardWrapper">
+              <img v-lazy="myListSubKategori.gb_sampul" style="width: 86px; height: 86px" alt />
+              <div class="textWrapper">
+                <h5
+                  :style="{color: '#' + myColor(myListSubKategori.id)}"
+                >{{ myListSubKategori.nama }}</h5>
+              </div>
+            </div>
+          </router-link>
+        </div>
+
+        <br />
+        <br />
+        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
       </div>
     </div>
   </section>
@@ -28,91 +29,106 @@
 
 <script>
 //import PrimaryButton from "../components/PrimaryButton";
-import c from "@/config.js"
-import axios from 'axios'
+import c from "@/config.js";
+import axios from "axios";
 
 export default {
   name: "List Hewan",
   //components: { PrimaryButton },
   data: function() {
     return {
-      list: [],
+      list: []
     };
   },
 
   mounted() {
-    this.getData()
+    this.getData();
   },
 
   methods: {
     mulaiKuiz() {
-      if(confirm("Apakah kamu ingin memulai kuiz?")) {
-
+      if (confirm("Apakah kamu ingin memulai kuiz?")) {
         const headers = {
-          'Authorization': "Bearer " + sessionStorage.getItem("Eduwisata_token")
-        }
-        
+          Authorization: "Bearer " + sessionStorage.getItem("Eduwisata_token")
+        };
+
         let loader = this.$loading.show();
-        axios.post(c.config.server_host + "/api/user/mulai-kuiz", [], {
+        axios
+          .post(c.config.server_host + "/api/user/mulai-kuiz", [], {
             headers: headers
           })
-          .then((response) => {
-              var data = response.data
-              loader.hide()
+          .then(response => {
+            var data = response.data;
+            loader.hide();
 
-              if(data.meta.short_msg == 'gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini') {
-                this.$swal({
-                  title: "Peringatan!",
-                  text: data.meta.message,
-                  icon: "warning"
-                });
+            if (
+              data.meta.short_msg ==
+              "gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini"
+            ) {
+              this.$swal({
+                title: "Peringatan!",
+                text: data.meta.message,
+                icon: "warning"
+              });
 
-                return false;
-              }
+              return false;
+            }
 
-              if (data.meta.short_msg == 'berhasil_memulai_sesi_kuiz') {
-                localStorage.setItem('kuiz_mbah_serut', "Kuiz started at " + data.results.mulai_pada)
-                this.$router.push("/Quiz");
-              } else if (data.meta.short_msg == "gagal_memulai_kuiz_baru_karena_masih_ada_kuiz_yang_belum_selesai_hari_ini") {
-                localStorage.setItem('kuiz_mbah_serut', "Kuiz started at now")
-                this.$router.push("/Quiz");
-              } else {
-                this.$swal({
-                  title: "Error!",
-                  text: "Terjadi kesalahan, gagal memulai kuiz",
-                  icon: "error"
-                });
-              }
-
-          })
+            if (data.meta.short_msg == "berhasil_memulai_sesi_kuiz") {
+              localStorage.setItem(
+                "kuiz_mbah_serut",
+                "Kuiz started at " + data.results.mulai_pada
+              );
+              this.$router.push("/Quiz");
+            } else if (
+              data.meta.short_msg ==
+              "gagal_memulai_kuiz_baru_karena_masih_ada_kuiz_yang_belum_selesai_hari_ini"
+            ) {
+              localStorage.setItem("kuiz_mbah_serut", "Kuiz started at now");
+              this.$router.push("/Quiz");
+            } else {
+              this.$swal({
+                title: "Error!",
+                text: "Terjadi kesalahan, gagal memulai kuiz",
+                icon: "error"
+              });
+            }
+          });
       }
     },
     backBtn() {
-      window.history.go(-1); return false;
-    }, 
+      window.history.go(-1);
+      return false;
+    },
     getData() {
-      const AuthStr = 'Bearer ' + sessionStorage.getItem('Eduwisata_token');
+      const AuthStr = "Bearer " + sessionStorage.getItem("Eduwisata_token");
       let loader = this.$loading.show();
-      axios.get(c.config.server_host + "/api/user/get-data-by-kategori-turunan/" + this.$route.params.id, {
-          headers: {
-            Authorization: AuthStr
+      axios
+        .get(
+          c.config.server_host +
+            "/api/user/get-data-by-kategori-turunan/" +
+            this.$route.params.id,
+          {
+            headers: {
+              Authorization: AuthStr
+            }
           }
-        }).then(response => {
-          var data = (response.data.results)
+        )
+        .then(response => {
+          var data = response.data.results;
           console.log(data);
-          this.list = data
-          loader.hide()
+          this.list = data;
+          loader.hide();
         })
-        .catch((error) => {
-          loader.hide()
+        .catch(error => {
+          loader.hide();
           this.$swal({
-            title: 'Error!',
+            title: "Error!",
             text: "Terjadi kesalahan, silahkan refresh halaman",
-            icon: 'error',
+            icon: "error"
           });
           console.error(error);
         });
-    
     },
 
     myColor(id) {
@@ -138,6 +154,20 @@ export default {
 </script>
 
 <style scoped>
+.cardWrapper {
+  margin-bottom: 15px;
+}
+
+.textWrapper {
+  margin-left: -10px;
+  background: #fff;
+  width: 100%;
+  padding: 20px 0 20px 30px;
+  z-index: -99;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .subKategori {
   padding-bottom: 100px;
 }
@@ -152,10 +182,10 @@ export default {
 }
 
 .card-wrapper {
-  margin-top: 20px;
-  /* border: solid 2px red; */
+  /* margin-top: 20px;
+  border: solid 2px red;
   display: flex;
-  align-items: center;
+  align-items: center; */
 }
 
 h5 {
@@ -209,7 +239,7 @@ h4 {
   border: none;
   border-bottom-style: solid;
   border-bottom-width: 6px;
-  background-color: #83DC9C;
-  border-bottom-color: #30B755;
+  background-color: #83dc9c;
+  border-bottom-color: #30b755;
 }
 </style>
