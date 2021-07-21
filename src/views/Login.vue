@@ -18,7 +18,7 @@
       <button @click="login()" class="tombol-login" type="button">Masuk Sekarang</button>
     </div>
 
-    <br />
+    <br /><br />
   </section>
 </template>
 

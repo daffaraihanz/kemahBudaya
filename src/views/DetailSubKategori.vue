@@ -49,14 +49,6 @@
                 alt
               />
             </div>
-            <div class="col-3" v-if="hewan.gb_lainnya">
-              <img
-                class="img-fluid"
-                @click="set_sampul_source(hewan.gb_lainnya)"
-                v-lazy="hewan.gb_lainnya"
-                alt
-              />
-            </div>
             <div class="col-3" v-if="hewan.gb_lottie">
               <div
                 @click="set_sampul_source('lottie_files/' + hewan.gb_lottie, true)"
