@@ -20,8 +20,8 @@
         </div>
 
         <br />
-        <br />
-        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button>
+        <!-- <br />
+        <button @click="mulaiKuiz()" class="tombol-login" type="button">Mulai Kuis</button> -->
       </div>
     </div>
   </section>
@@ -82,7 +82,7 @@ export default {
               this.$router.push("/Quiz");
             } else if (
               data.meta.short_msg ==
-              "gagal_memulai_kuiz_baru_karena_masih_ada_kuiz_yang_belum_selesai_hari_ini"
+              "gagal_memulai_kuiz_baru_karena_sudah_mengerjakan_kuiz_hari_ini_coba_lagi_besok"
             ) {
               localStorage.setItem("kuiz_mbah_serut", "Kuiz started at now");
               this.$router.push("/Quiz");
