@@ -17,10 +17,10 @@
         <div class="mt-3 mini-image-wrapper">
           <!-- <img src="@/assets/dummyImage4.png" alt /> -->
           <!-- Sampul -->
-          <img v-if="!gb_sampul_lottie_path" class="img-fluid firstImage" :src="gb_sampul" alt />
+          <img v-if="!gb_sampul_lottie_path && !youtube_show_video" class="img-fluid firstImage" :src="gb_sampul" alt />
           <lottie-animation
             class="lottieImage"
-            v-if="gb_sampul_lottie_path"
+            v-if="gb_sampul_lottie_path && !youtube_show_video"
             :path="gb_sampul_lottie_path"
             :loop="true"
             :autoPlay="true"
@@ -30,12 +30,22 @@
             width="100%"
             height="100%"
           />
+          <iframe
+              v-if="youtube_show_video"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+              :src="iframe_source"
+              width="100%"
+              style="height: 40vh"
+            ></iframe>
           <!-- Sampul -->
 
-          <div class="row mt-4 secondImage">
+          <div class="row mt-3 secondImage">
             <div class="col-3" v-if="hewan.gb_sampul">
               <img
-                class="img-fluid"
+                class="img-fluid mt-2"
                 @click="set_sampul_source(hewan.gb_sampul)"
                 v-lazy="hewan.gb_sampul"
                 alt
@@ -43,7 +53,7 @@
             </div>
             <div class="col-3" v-if="hewan.gb_lainnya">
               <img
-                class="img-fluid"
+                class="img-fluid mt-2"
                 @click="set_sampul_source(hewan.gb_lainnya)"
                 v-lazy="hewan.gb_lainnya"
                 alt
@@ -68,6 +78,10 @@
                 />
               </div>
             </div>
+
+          <div class="col-3 border bg-light" style="border-radius: 100%">
+            <img @click="set_sampul_source('youtube', false, 'youtube')" src="img/youtube.svg" class="mt-1" width="100%" alt="" srcset="">
+          </div>
           </div>
 
           <!-- <div class="mt-3 mini-image-wrapper">  
@@ -83,7 +97,7 @@
           <p v-if="deskripsi_b_inggris">{{hewan.deskripsi_b_inggris}}</p>
         </div>
 
-        <div class="card">
+        <!-- <div class="card">
           <div class="card-body p-2">
             <iframe
               v-if="iframe_source"
@@ -95,7 +109,7 @@
               width="100%"
             ></iframe>
           </div>
-        </div>
+        </div> -->
 
         <br />
         <br />
@@ -116,6 +130,7 @@
           </div>
         </div>
 
+        <br />
         <br />
 
         <!-- <PrimaryButton
@@ -149,7 +164,8 @@ export default {
       deskripsi_b_inggris: false,
       iframe_source: false,
       gb_sampul: null,
-      gb_sampul_lottie_path: null
+      gb_sampul_lottie_path: null,
+      youtube_show_video: false
     };
   },
 
@@ -228,12 +244,22 @@ export default {
       window.history.go(-1);
       return false;
     },
-    set_sampul_source(link_gambar, is_lottie = false) {
+    set_sampul_source(link_gambar, is_lottie = false, youtube = null) {
+      if(youtube) {
+        this.gb_sampul = null
+        this.gb_sampul_lottie_path = null
+        this.youtube_show_video = true
+        console.log("youtube");
+        return true;
+      }
+
       if (!is_lottie) {
         this.gb_sampul = link_gambar;
+        this.youtube_show_video = false
         this.gb_sampul_lottie_path = null;
       } else {
         this.gb_sampul_lottie_path = link_gambar;
+        this.youtube_show_video = false
         this.gb_sampul = null;
       }
     },
